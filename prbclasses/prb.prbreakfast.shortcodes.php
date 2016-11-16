@@ -38,7 +38,7 @@ class PRBshortCode {
     		<div class="clear"></div>
     		<select class="prb_form_select">
     			<option velue="bl1">
-    				Wähle dein Bundesland
+    				Wähle dein Bundesland 
     			</option>
     			<option velue="bl1">
     				Bundesland2
