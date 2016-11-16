@@ -1,0 +1,91 @@
+
+
+
+
+
+
+
+
+
+
+/* 
+* Start Form *
+*/
+
+.prb_form_container .prb_form input.prb_input, #prb_form_send, .prb_form_container .prb_form input.prb_input:focus::-webkit-input-placeholder {
+		
+	-webkit-transition: all 300ms ease-in-out;
+	transition: all 300ms ease-in-out;
+}
+
+
+
+.prb_form_container .prb_form input.prb_input {
+	
+	margin: 10% 10% 0 10%;
+	width: 70%;
+	padding: 5%;
+	display: block;
+	border: none;
+	border-bottom: 1px solid #dadada;
+	background: -webkit-linear-gradient(rgba(255,255,255,0) 99%, #dadada 1%);
+	background: linear-gradient(rgba(255,255,255,0) 99%, #dadada 1%);
+	background-size: 0 100%;
+	background-repeat: no-repeat;
+	color: #dadada;
+}
+
+.prb_form_container .prb_form input.prb_input:focus {
+	
+	outline: none;
+	background-size: 100% 100%;	
+	border-color: #F409CB;
+	
+}
+
+.prb_form_container .prb_form input.prb_input:focus::-webkit-input-placeholder {
+	
+	font-size:11px;
+	-webkit-transform: translateY(-25px);
+	transform: translateY(-25px);
+	visibility: visible !important;
+	color: #F409CB;
+}
+
+#prb_form_send {
+	
+	background: #dadada;
+	border: none;
+	color: #777;
+	width: 80%;
+	margin: 5% 10% 10% 10%;
+	cursor: pointer;	
+}
+
+#prb_form_send:hover {
+	
+	background: #666;
+	color: #fff;
+	
+}
+/* 
+* End Form *
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
