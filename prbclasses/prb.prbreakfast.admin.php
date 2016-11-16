@@ -23,19 +23,40 @@ class PRBAdmin extends PRBCommon
 		add_action('admin_init', array(&$this, 'admin_init'), 9);
 
 
-
+    add_action('wp_ajax_delete_donation', array( $this, 'delete_donation' ));
+    //add_action('wp_ajax_nopriv_show_dank_screen', array( $this, 'show_dank_screen' ));
 
 	}
 
+  public function delete_donation()
+  {
+    if ( !wp_verify_nonce( $_REQUEST['nonce'], "delete_donation_nonce")) {
+      // TODO ERRORE zurücksenden
+      exit("No naughty business please");
+    }
+
+    $donationID = $_REQUEST['id'];
+    $donations = $this->options['prb_donations'];
+    $donations = array_reverse($donations);
+
+
+    unset($donations[$donationID]);
+
+    $donations = array_reverse($donations);
+    $this->prbreakfast_set_option('prb_donations',$donations);
+    die();
+  }
 
   function add_admin_styles()
   {
 
     // jQuery Cirlce JS
-
-
     wp_register_script( 'prbreakfast_admin_circle', sfprbreakfast_url.'admin/js/circle-progress.min.js', array('jquery'));
     wp_enqueue_script('prbreakfast_admin_circle');
+
+    // Table Sort
+    wp_register_script( 'prbreakfast_admin_table_sort', sfprbreakfast_url.'admin/js/jquery.tablesorter.min.js', array('jquery'));
+    wp_enqueue_script('prbreakfast_admin_table_sort');
 
     /* Custom style */
     wp_register_style( 'prbreakfast_admin_style', sfprbreakfast_url.'admin/css/custom_admin.css');
@@ -45,6 +66,9 @@ class PRBAdmin extends PRBCommon
 		// ajaxurl mitgeben
 		wp_localize_script( 'sfprb_custom_admin_js', 'Custom', array('ajaxurl'  => admin_url( 'admin-ajax.php' ),'homeurl' => home_url()));
 		wp_enqueue_script('sfprb_custom_admin_js');
+
+    wp_register_style( 'prbreakfast_font_awesome', sfprbreakfast_url.'libs/font-awesome/font-awesome.min.css');
+		wp_enqueue_style('prbreakfast_font_awesome');
   }
 
 

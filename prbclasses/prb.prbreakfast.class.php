@@ -107,8 +107,8 @@ class PRBreakfast
 
 
 		/* Font Awesome */
-		//wp_register_style( 'sfgewinnspiel_font_awesome', sfgewinnspiel_url.'libs/font-awesome/font-awesome.min.css');
-		//wp_enqueue_style('sfgewinnspiel_font_awesome');
+		wp_register_style( 'prbreakfast_font_awesome', sfprbreakfast_url.'libs/font-awesome/font-awesome.min.css');
+		wp_enqueue_style('prbreakfast_font_awesome');
 
 		/* Custom style */
 		wp_register_style( 'prbreakfast_style', sfprbreakfast_url.'templates/'.sfprbreakfast_template.'/css/default.css');

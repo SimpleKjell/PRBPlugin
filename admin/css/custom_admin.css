@@ -38,3 +38,28 @@
     color: #aaa;
     margin-top: 12px;
 }
+
+/*
+* START Main Donation Table
+*/
+#donationTableMain th {
+  cursor: pointer;
+  color: #00b9eb;
+}
+#donationTableMain th span {
+  color: #555;
+  display: none;
+}
+#donationTableMain th.headerSortDown span.headerSortDown, #donationTableMain th.headerSortUp span.headerSortUp {
+  display: inline;
+}
+
+.editDonationSaveButton, #donationTableMain .close, #donationTableMain .editInput {
+  display: none;
+}
+#donationTableMain .close, #donationTableMain .delete {
+  color: #EA4E92;
+}
+/*
+* END Main Donation Table
+*/

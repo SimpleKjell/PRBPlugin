@@ -19,6 +19,7 @@
 
   //var_dump($donations);
 
+
   if(!empty($donations)) {
     end($donations);
     $lastKey = key($donations);
@@ -41,6 +42,7 @@
         <input type="text" name="prb_donations[<?php echo $key;?>][value]" value="<?php echo $donation['value'];?>" />
         <input type="text" name="prb_donations[<?php echo $key;?>][city]" value="<?php echo $donation['city'];?>" />
         <input type="text" name="prb_donations[<?php echo $key;?>][mail]" value="<?php echo $donation['mail'];?>" />
+        <input type="text" name="prb_donations[<?php echo $key;?>][month]" value="<?php echo $donation['month'];?>" />
         <?php
       }
     }
@@ -68,6 +70,15 @@
       <label for="mail" >E-Mail</label>
       <input name="prb_donations[<?php echo $nextKey;?>][mail]" id="mail" type="email" />
     </div>
+    <div class="field">
+      <label for="mail" >Monat/Jahr</label>
+      <select name="prb_donations[<?php echo $nextKey;?>][month]">
+        <option value="<?php echo date('M Y');?>"><?php echo date('M Y');?></option>
+        <option value="<?php echo date("M Y", strtotime("first day of previous month"));?>"><?php echo date("M Y", strtotime("first day of previous month"));?></option>        
+      </select>
+    </div>
+
+
   </div>
 
 
