@@ -19,6 +19,37 @@ PRBAdmin.prototype = {
 		this.spendenCircle();
 		this.tableSort();
 		this.editDonationValues();
+		this.donationBarGraph();
+	},
+	donationBarGraph: function() {
+
+		var data = jQuery('#myfirstchart').attr('data-info');
+		console.log(data);
+
+
+		Morris.Bar({
+		  element: 'myfirstchart',
+		  data: [
+		    { y: 'Jan 2016', a: 100 },
+		    { y: 'Feb 2016', a: 75},
+		    { y: 'Mae 2016', a: 50 },
+		    { y: 'Apr 2016', a: 75 },
+		    { y: 'Mai 2016', a: 50 },
+		    { y: 'Jun 2016', a: 75 },
+		    { y: 'Jul 2016', a: 100 },
+				{ y: 'Aug 2016', a: 100 },
+				{ y: 'Sep 2016', a: 100 },
+				{ y: 'Okt 2016', a: 100 },
+				{ y: 'Nov 2016', a: 100 },
+				{ y: 'Dez 2016', a: 150 },
+		  ],
+		  xkey: 'y',
+		  ykeys: ['a'],
+		  labels: ['Spende'],
+			resize: true,
+			gridTextSize: 12,
+			barColors: ["#EA4E92"]
+		});
 	},
 	editDonationValues: function() {
 		jQuery('#donationTableMain .edit').click(function(evt) {
@@ -103,7 +134,7 @@ PRBAdmin.prototype = {
 	},
 	tableSort: function() {
 
-		jQuery('#donationTableMain').tablesorter();
+		jQuery('#donationTableMain').tablesorter({dateFormat: 'M Y'});
 
 	},
 	spendenCircle: function() {

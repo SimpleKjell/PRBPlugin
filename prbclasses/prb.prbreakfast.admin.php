@@ -58,6 +58,18 @@ class PRBAdmin extends PRBCommon
     wp_register_script( 'prbreakfast_admin_table_sort', sfprbreakfast_url.'admin/js/jquery.tablesorter.min.js', array('jquery'));
     wp_enqueue_script('prbreakfast_admin_table_sort');
 
+
+    wp_register_style( 'prbreakfast_admin_bar_css', sfprbreakfast_url.'admin/css/morris.css');
+    wp_enqueue_style('prbreakfast_admin_bar_css');
+
+    // Morris JS
+    wp_register_script( 'prbreakfast_admin_raphael_js', sfprbreakfast_url.'admin/js/raphael.min.js', array('jquery'));
+    wp_enqueue_script('prbreakfast_admin_raphael_js');
+
+    // Morris JS
+    wp_register_script( 'prbreakfast_admin_morris_js', sfprbreakfast_url.'admin/js/morris.min.js', array('jquery'));
+    wp_enqueue_script('prbreakfast_admin_morris_js');
+
     /* Custom style */
     wp_register_style( 'prbreakfast_admin_style', sfprbreakfast_url.'admin/css/custom_admin.css');
     wp_enqueue_style('prbreakfast_admin_style');

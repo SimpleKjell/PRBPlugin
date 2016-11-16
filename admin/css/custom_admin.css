@@ -60,6 +60,9 @@
 #donationTableMain .close, #donationTableMain .delete {
   color: #EA4E92;
 }
+.canvasjs-chart-credit {
+  display: none;
+}
 /*
 * END Main Donation Table
 */

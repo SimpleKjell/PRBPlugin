@@ -42,7 +42,11 @@
   $gesamtDurchschnitt = $gesamtDurchschnittsValue / count($durchschnittsValue);
 
 
-
+  if(!empty($donations)) {
+    foreach($donations as $donation) {
+      $donationsPerMont[$donation['month']] = $monthDonations[$donation['month']];
+    }
+  }
 
   ?>
   <p>Hier kommt eventuell Spendenziel?<br />
@@ -51,7 +55,36 @@
 
 
   <center>
+    <h3>Spendenübersicht 2016</h3>
+    <div style="padding: 1cm 4cm 1cm 4cm;">
+      <?php
+      //$jsObject = '[';
+      $jsObject = array();
+      foreach($donationsPerMont as $monthDonation => $value) {
+
+        $jsObject = array_push(array('y' => $monthDonation));
+
+          //$jsObject .= '{ y: &quot;'.$monthDonation.'&quot;, a: '.$value.'},';
+      }
+      //$length = strlen($jsObject);
+      //$jsObject = substr($jsObject, 0, $length -1);
+      //$jsObject .= ']';
+
+      var_dump($jsObject);
+      $jsObject = json_encode($jsObject);
+
+      var_dump($jsObject);
+      ?>
+        <div id="myfirstchart" data-info="<?php echo $jsObject?>" style="height: 250px;width:100%"></div>
+    </div>
+
+
+
     <?php
+
+
+
+
     if(!empty($monthDonations)) {
 
       // Letzte Donations immer als erstes
