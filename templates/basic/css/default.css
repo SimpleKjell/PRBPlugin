@@ -22,52 +22,94 @@
 
 .prb_form_container .prb_form input.prb_input {
 	
-	margin: 10% 10% 0 10%;
-	width: 70%;
-	padding: 5%;
+	margin: 1% 0% 0 13%;
+	width: 360px;
+	padding: 20px;
 	display: block;
+	float: left;
 	border: none;
-	border-bottom: 1px solid #dadada;
-	background: -webkit-linear-gradient(rgba(255,255,255,0) 99%, #dadada 1%);
-	background: linear-gradient(rgba(255,255,255,0) 99%, #dadada 1%);
+	background: -webkit-linear-gradient(rgba(255,255,255,0) 99%, #EB6CA3 1%);
+	background: linear-gradient(rgba(255,255,255,0) 99%, #EB6CA3 1%);
 	background-size: 0 100%;
 	background-repeat: no-repeat;
-	color: #dadada;
+	color: #333333;
 }
 
-.prb_form_container .prb_form input.prb_input:focus {
+.prb_form_container .prb_form input.prb_input:focus, .prb_form_select:focus {
 	
 	outline: none;
 	background-size: 100% 100%;	
-	border-color: #F409CB;
+	background-color: #fff !important;
+	
 	
 }
 
 .prb_form_container .prb_form input.prb_input:focus::-webkit-input-placeholder {
 	
 	font-size:11px;
-	-webkit-transform: translateY(-25px);
-	transform: translateY(-25px);
+	font-weight: 600;
+	-webkit-transform: translateY(-15px);
+	transform: translateY(-15px);
 	visibility: visible !important;
-	color: #F409CB;
+	color: #EB6CA3;
+	
 }
+
+
+.prb_form_select {
+	
+	display:block;
+	margin: 1% 0 0 13%;
+	padding: 20px;
+	float: left;
+	color: #333 !important;
+	background: -webkit-linear-gradient(rgba(255,255,255,0) 99%, #EB6CA3 1%);
+	background: linear-gradient(rgba(255,255,255,0) 99%, #EB6CA3 1%);
+	background-size: 0 100%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+	-ms-appearance: none;
+	appearance: none;	
+}
+
+
+.prb_form_checkbox {
+	
+	float: left;
+	display: inline-block;
+	margin: 3% 0% 0% 7%;
+	
+	
+}
+
+.prb_form_checkbox label {
+	
+	font-weight: 400 !important;
+	margin-left: 5px;
+	font-size: 12px;
+}
+
 
 #prb_form_send {
 	
 	background: #dadada;
 	border: none;
-	color: #777;
-	width: 80%;
-	margin: 5% 10% 10% 10%;
-	cursor: pointer;	
+	color: #333;
+	width: 200px;
+	margin: 4% 10% 0% 10%;
+	cursor: pointer;
+	text-transform: uppercase;
+	font-weight:600;
 }
 
 #prb_form_send:hover {
 	
-	background: #777;
+	background: #EB6CA3;
 	color: #fff;
 	
 }
+
 /* 
 * End Form *
 */

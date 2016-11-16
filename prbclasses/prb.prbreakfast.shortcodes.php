@@ -35,15 +35,18 @@ class PRBshortCode {
     		<input class="prb_input" type="text" placeholder="Nachname" requiered>
     		<input class="prb_input" type="tel" placeholder="Handynummer" requiered>
     		<input class="prb_input" type="email" placeholder="E-Mail" requiered>
-    		<select>
+    		<div class="clear"></div>
+    		<select class="prb_form_select">
     			<option velue="bl1">
-    				Bundesland1
+    				Wähle dein Bundesland
     			</option>
     			<option velue="bl1">
     				Bundesland2
     			</option>
     		</select>
-    		<input class="prb_input" type="submit" value="senden" id="prb_form_send">
+    		
+    		<div class="prb_form_checkbox"><label for="prb_form_checkboxid"><input id="prb_form_checkboxid" type="checkbox" name="newsletter" value="newsletter">Ich darf vom Krebshilfeteam in meiner Nähe kontaktiert werden.</label></div>
+    		<input class="prb_input" type="submit" value="absenden" id="prb_form_send">
     		
     	</form>
     </div>
