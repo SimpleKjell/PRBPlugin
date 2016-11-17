@@ -37,16 +37,40 @@ class PRBshortCode {
     		<input class="prb_input" type="email" placeholder="E-Mail" requiered>
     		<div class="clear"></div>
     		<select class="prb_form_select">
-    			<option velue="bl1">
+    			<option velue="waehle">
     				Wähle dein Bundesland 
     			</option>
-    			<option velue="bl1">
-    				Bundesland2
+    			<option velue="burgenland">
+    				Burgenland
+    			</option>
+    			<option velue="oberoesterreich">
+    				Oberösterreich
+    			</option>
+    			<option velue="tirol">
+    				Tirol
+    			</option>
+    			<option velue="kaernten">
+    				Kärnten
+    			</option>
+    			<option velue="salzburg">
+    				Salzburg
+    			</option>
+    			<option velue="voralberg">
+    				Voralberg
+    			</option>
+    			<option velue="niederoesterreich">
+    				Niederösterreich
+    			</option>
+    			<option velue="steiermark">
+    				Steiermark
+    			</option>
+    			<option velue="wien">
+    				Wien
     			</option>
     		</select>
     		
-    		<div class="prb_form_checkbox"><label for="prb_form_checkboxid"><input id="prb_form_checkboxid" type="checkbox" name="newsletter" value="newsletter">Ich darf vom Krebshilfeteam in meiner Nähe kontaktiert werden.</label></div>
-    		<input class="prb_input" type="submit" value="absenden" id="prb_form_send">
+    		<div class="prb_form_checkbox"><label for="prb_form_checkboxid"><input id="prb_form_checkboxid" type="checkbox" name="newsletter" value="newsletter">Ich darf vom Krebshilfeteam in meiner Nähe kontaktiert werden.<div class="prb_form_btn"></div></label></div>
+    		<div class="clear"></div><input class="prb_input" type="submit" value="absenden" id="prb_form_send">
     		
     	</form>
     </div>

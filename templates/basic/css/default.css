@@ -59,7 +59,7 @@
 .prb_form_select {
 
 	display:block;
-	margin: 1% 0 0 13%;
+	margin: 1% 11% 0 13%;
 	padding: 20px;
 	float: left;
 	color: #333 !important;
@@ -79,16 +79,48 @@
 	float: left;
 	display: inline-block;
 	margin: 3% 0% 0% 7%;
-
-
 }
+
+#prb_form_checkboxid { opacity: 0; }
+
+.prb_form_btn {
+	
+	float:left;
+	width: 40px;
+	height: 20px;
+	background: #e5e5e5;
+	position: relative;
+	border-radius: 10px;
+}
+
+.prb_form_btn:before {
+	
+	content: "";
+	position: absolute;
+	height: 16px;
+	width: 16px;
+	background: #fff;
+	left: 2px;
+	top: 2px;
+	transition: all 150ms ease-out;
+	border-radius: 10px;
+	
+}
+
+/*Funktion um die Checkbox zu switchen*/
+
+input[type=checkbox]:checked + .prb_form_btn:before { left: 22px; }
+
+input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
+
 
 .prb_form_checkbox label {
 
 	font-weight: 400 !important;
-	margin-left: 5px;
-	font-size: 12px;
+	margin-left: 10px;
+	font-size: 13px;
 }
+
 
 
 #prb_form_send {
@@ -101,6 +133,8 @@
 	cursor: pointer;
 	text-transform: uppercase;
 	font-weight:600;
+	left: 40%;
+	transform: translateX(-50%);
 }
 
 #prb_form_send:hover {
