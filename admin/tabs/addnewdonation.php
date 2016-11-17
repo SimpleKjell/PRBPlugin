@@ -74,7 +74,8 @@
       <label for="mail" >Monat/Jahr</label>
       <select name="prb_donations[<?php echo $nextKey;?>][month]">
         <option value="<?php echo date('M Y');?>"><?php echo date('M Y');?></option>
-        <option value="<?php echo date("M Y", strtotime("first day of previous month"));?>"><?php echo date("M Y", strtotime("first day of previous month"));?></option>        
+        <!--option value="Feb 2015">Jan 2015</option-->
+        <option value="<?php echo date("M Y", strtotime("first day of previous month"));?>"><?php echo date("M Y", strtotime("first day of previous month"));?></option>
       </select>
     </div>
 

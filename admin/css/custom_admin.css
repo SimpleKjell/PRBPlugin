@@ -63,6 +63,10 @@
 .canvasjs-chart-credit {
   display: none;
 }
+.prevYear, .nextYear {
+  color: #EA4E92;
+  cursor: pointer;
+}
 /*
 * END Main Donation Table
 */

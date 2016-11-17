@@ -49,80 +49,98 @@
   }
 
   ?>
-  <p>Hier kommt eventuell Spendenziel?<br />
-  Kreisgrafik, wieviel errreicht wurde.<br />
-  Pro Monat?</p>
+
 
 
   <center>
-    <h3>Spendenübersicht 2016</h3>
-    <div style="padding: 1cm 4cm 1cm 4cm;">
+    <h3 class="barGraphHeading"><span class="prevYear"><i class="fa fa-chevron-left" aria-hidden="true"></i></span> Spendenübersicht <span class="year">2016</span> <span class="nextYear"><i class="fa fa-chevron-right" aria-hidden="true"></i></span></h3>
+    <div class="barGraphStatistics">
       <?php
-      //$jsObject = '[';
-      $jsObject = array();
+
+
+      // Vorab sollte das Jahr getrennt werden
+      $months = '';
+      $dntValues = '';
       foreach($donationsPerMont as $monthDonation => $value) {
 
-        $jsObject = array_push(array('y' => $monthDonation));
+        preg_match_all('!\d+!', $monthDonation, $matches);
+        $var = implode(' ', $matches[0]);
 
-          //$jsObject .= '{ y: &quot;'.$monthDonation.'&quot;, a: '.$value.'},';
+        if(!isset($year[$var])) {
+            $pureMonth = trim(preg_replace('/[0-9]+/', '', $monthDonation));
+            $year[$var] = array($pureMonth => $value);
+        } else {
+          $pureMonth = trim(preg_replace('/[0-9]+/', '', $monthDonation));
+          $year[$var] = array_merge($year[$var], array($pureMonth => $value));
+        }
+
+        $months .= $monthDonation .',';
+        $dntValues .= $value. ',';
+
       }
-      //$length = strlen($jsObject);
-      //$jsObject = substr($jsObject, 0, $length -1);
-      //$jsObject .= ']';
+      $length = strlen($months);
+      $months = substr($months, 0, $length -1);
+      $length = strlen($dntValues);
+      $dntValues = substr($dntValues, 0, $length -1);
 
-      var_dump($jsObject);
-      $jsObject = json_encode($jsObject);
 
-      var_dump($jsObject);
+
+
+      // Für jedes Jahr sind nun mit Monat => Value alle Daten erfasst
+      // Nun aufbereiten fürs js
+      $dntValues = '';
+      foreach($year as $year => $val) {
+
+
+      $dntValues .= (array_key_exists('Jan',$val)) ? $val['Jan'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Feb',$val)) ? $val['Feb'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Mar',$val)) ? $val['Mar'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Apr',$val)) ? $val['Apr'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('May',$val)) ? $val['May'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Jun',$val)) ? $val['Jun'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Jul',$val)) ? $val['Jul'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Aug',$val)) ? $val['Aug'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Sep',$val)) ? $val['Sep'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Oct',$val)) ? $val['Oct'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Nov',$val)) ? $val['Nov'] : '0';
+      $dntValues .= ',';
+      $dntValues .= (array_key_exists('Dec',$val)) ? $val['Dec'] : '0';
+
       ?>
-        <div id="myfirstchart" data-info="<?php echo $jsObject?>" style="height: 250px;width:100%"></div>
+      <div class="hidden" id="graphData<?php echo $year;?>" data-graphValues="<?php echo $dntValues;?>" ></div>
+      <?php
+
+      $dntValues = '';
+
+      }
+
+
+      ?>
+      <script type="text/javascript" src="http://www.chartjs.org/assets/Chart.js"></script>
+
+
+    </div>
+    <div style="padding: 1cm 4cm 1cm 4cm;">
+      <div class="canvas_container">
+        <canvas id="canvas" width="900" height="300"></canvas>
+      </div>
+
+      <script>
+        PRBAdmin.prototype.barGraph();
+      </script>
     </div>
 
 
-
-    <?php
-
-
-
-
-    if(!empty($monthDonations)) {
-
-      // Letzte Donations immer als erstes
-      $monthDonationsReverse = array_reverse($monthDonations);
-
-      $i = 0;
-      foreach($monthDonationsReverse as $monthName => $val) {
-
-        // Prozent ausrechnen aus dem Durchschnittswert
-        //$percentage = round($val * 100 / $gesamtDurchschnitt);
-        $percentage = round($durchschnittsValue[$monthName] * 100 / $gesamtDurchschnitt);
-
-        if($percentage > 100) {
-          $percentage = 100;
-        }
-        $percentage = $percentage / 100;
-
-        ?>
-          <div data-value="<?php echo $percentage;?>" data-fill="{&quot;color&quot;: &quot;#EA4E92&quot;}" data-amount="<?php echo $val;?>" class="circle">
-            <strong></strong>
-            <span>Monat <br><?php echo $monthName;?></span>
-          </div>
-        <?php
-        if($i > 5) {
-          break;
-        }
-        $i++;
-      }
-    }
-
-    ?>
-    <p>
-      In jedem Monat werden im Durchschnitt <?php echo $gesamtDurchschnitt;?>€ Spenden gesammelt.
-    </p>
-    <p>
-      Ein Durschnittswert der Spenden wird in jedem Monat neu berechnet.
-      In den ersten Monaten können die Statistiken vorerst abweichen.
-    </p>
   </center>
 
 

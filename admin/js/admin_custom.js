@@ -19,37 +19,129 @@ PRBAdmin.prototype = {
 		this.spendenCircle();
 		this.tableSort();
 		this.editDonationValues();
-		this.donationBarGraph();
 	},
-	donationBarGraph: function() {
+	getTwoDataGraph: function(year, lastYear) {
 
-		var data = jQuery('#myfirstchart').attr('data-info');
-		console.log(data);
+		var dataValuesCurrentYear = jQuery('#graphData'+year).attr('data-graphValues');
+		var dataValuesLastYear = jQuery('#graphData'+lastYear).attr('data-graphValues');
+
+		var myData = {
+			labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct", "Nov", "Dec"],
+			datasets : [
+				{
+					fillColor : "rgba(220,220,220,.5)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					data : dataValuesLastYear.split(',')
+				},
+				{
+					fillColor : "rgba(234, 78, 146, 0.5)",
+					strokeColor : "rgba(234, 78, 146, 1)",
+					pointColor : "rgba(234, 78, 146, 1)",
+					pointStrokeColor : "#fff",
+					data : dataValuesCurrentYear.split(',')
+				}
+			]
+		}
+
+		return myData;
+	},
+	getSingleDataGraph: function(year) {
+
+		// Bein Initialisieren wird hier einfach current abgefragt
+		var dataValuesCurrentYear = jQuery('#graphData'+year).attr('data-graphValues');
 
 
-		Morris.Bar({
-		  element: 'myfirstchart',
-		  data: [
-		    { y: 'Jan 2016', a: 100 },
-		    { y: 'Feb 2016', a: 75},
-		    { y: 'Mae 2016', a: 50 },
-		    { y: 'Apr 2016', a: 75 },
-		    { y: 'Mai 2016', a: 50 },
-		    { y: 'Jun 2016', a: 75 },
-		    { y: 'Jul 2016', a: 100 },
-				{ y: 'Aug 2016', a: 100 },
-				{ y: 'Sep 2016', a: 100 },
-				{ y: 'Okt 2016', a: 100 },
-				{ y: 'Nov 2016', a: 100 },
-				{ y: 'Dez 2016', a: 150 },
-		  ],
-		  xkey: 'y',
-		  ykeys: ['a'],
-		  labels: ['Spende'],
-			resize: true,
-			gridTextSize: 12,
-			barColors: ["#EA4E92"]
-		});
+		var myData = {
+			labels : ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct", "Nov", "Dec"],
+			datasets : [
+				{
+					fillColor : "rgba(234, 78, 146, 0.5)",
+					strokeColor : "rgba(234, 78, 146, 1)",
+					pointColor : "rgba(234, 78, 146, 1)",
+					pointStrokeColor : "#fff",
+					data : dataValuesCurrentYear.split(',')
+				}
+			]
+		}
+
+		return myData;
+	},
+	createBarChart: function(availableYears, currentYear, lastYear) {
+
+		var nextYear = currentYear+1;
+		if(availableYears.indexOf(lastYear) != -1)
+		{
+				// Wenn es kein nächstes Jahr gibt, zeige auch den Pfeil nicht an
+			jQuery('.barGraphHeading .nextYear').hide();
+		} else {
+			// Wenn es ein nächstes Jahr gibt, zeige auch den Pfeil an
+			jQuery('.barGraphHeading .nextYear').show();
+		}
+
+		// Wenn es ein Vorjahr gibt, zeige es als zweite Grafik an.
+		if(availableYears.indexOf(lastYear) != -1)
+		{
+			// Wenn es ein Vorjahr gibt, zeige auch den Pfeil an
+			jQuery('.barGraphHeading .prevYear').show();
+			var myData = this.getTwoDataGraph(currentYear, lastYear);
+	 	} else {
+			// Da es kein Vorjahr gibt, muss der Pfeil auch ausgeblendet werden
+			jQuery('.barGraphHeading .prevYear').hide();
+			var myData = this.getSingleDataGraph(currentYear);
+		}
+
+		// Vorerst löschen, dann neu setzen, da es Probleme gab.
+		jQuery('.canvas_container').empty().append('<canvas id="canvas" width="900" height="300"></canvas>');
+
+
+		new Chart(document.getElementById("canvas").getContext("2d")).Line(myData)
+
+	},
+	barGraph: function() {
+
+		var currentYear = new Date().getFullYear()
+		var lastYear = currentYear-1;
+
+		jQuery('.barGraphHeading .year').text(currentYear);
+
+
+		var availableYears = '';
+		var statisticIds = jQuery('.barGraphStatistics div').each(function() {
+			var string = jQuery(this).attr('id');
+			var year = string.replace( /^\D+/g, '');
+
+			availableYears += year + ',';
+		})
+		var length = availableYears.length;
+		availableYears = availableYears.substring(0, length -1);
+
+
+		this.createBarChart(availableYears, currentYear, lastYear);
+
+		that = this;
+		// Handle prev next Year statistics
+		jQuery('.barGraphHeading .prevYear').click(function() {
+			currentYear = currentYear-1;
+			lastYear = currentYear-1;
+
+			jQuery('.barGraphHeading .year').text(currentYear);
+
+			that.createBarChart(availableYears, currentYear, lastYear);
+		})
+
+		// Handle next Year statistics
+		jQuery('.barGraphHeading .nextYear').click(function() {
+			currentYear = currentYear+1;
+			lastYear = currentYear-1;
+
+			jQuery('.barGraphHeading .year').text(currentYear);
+
+			that.createBarChart(availableYears, currentYear, lastYear);
+		})
+
+
 	},
 	editDonationValues: function() {
 		jQuery('#donationTableMain .edit').click(function(evt) {
