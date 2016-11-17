@@ -71,13 +71,13 @@ PRBAdmin.prototype = {
 	createBarChart: function(availableYears, currentYear, lastYear) {
 
 		var nextYear = currentYear+1;
-		if(availableYears.indexOf(lastYear) != -1)
+		if(availableYears.indexOf(nextYear) != -1)
 		{
-				// Wenn es kein nächstes Jahr gibt, zeige auch den Pfeil nicht an
-			jQuery('.barGraphHeading .nextYear').hide();
-		} else {
 			// Wenn es ein nächstes Jahr gibt, zeige auch den Pfeil an
 			jQuery('.barGraphHeading .nextYear').show();
+		} else {			
+			// Wenn es kein nächstes Jahr gibt, zeige auch den Pfeil nicht an
+			jQuery('.barGraphHeading .nextYear').hide();
 		}
 
 		// Wenn es ein Vorjahr gibt, zeige es als zweite Grafik an.

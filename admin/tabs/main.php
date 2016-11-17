@@ -5,6 +5,44 @@
 
 
   <?php
+  $currUser = wp_get_current_user();
+
+  switch ($currUser->user_email) {
+    case 'office@krebshilfe-bgld.at':
+      $resp = 'Burgenland';
+      break;
+    case 'office@krebshilfe-ooe.at':
+      $resp = 'Oberösterreich';
+      break;
+    case 'krebshilfe@i-med.ac.at':
+      $resp = 'Tirol';
+      break;
+    case 'office@krebshilfe-ktn.at':
+      $resp = 'Kärnten';
+      break;
+    case 'office@krebshilfe-sbg.at':
+      $resp = 'Salzburg';
+      break;
+    case 'office@krebshilfe-vbg.at':
+      $resp = 'Vorarlberg';
+      break;
+    case 'krebshilfe@krebshilfe-noe.at':
+      $resp = 'Niederösterreich';
+      break;
+    case 'office@krebshilfe.at':
+      $resp = 'Steiermark';
+      break;
+    case 'service@krebshilfe-wien.at':
+      $resp = 'Wien';
+      break;
+    case 'service@krebshilfe.net':
+      $resp = 'Admin';
+      break;
+    default:
+      $resp = 'Admin';
+      break;
+  }
+
 
   $donations = $this->options['prb_donations'];
 
@@ -16,7 +54,10 @@
     $donations = array_reverse($donations);
   }
 
-  $donationMonth = date('M Y');
+
+
+
+
 
   $monthDonations = array();
   $donationAmount = array();
@@ -42,18 +83,37 @@
   $gesamtDurchschnitt = $gesamtDurchschnittsValue / count($durchschnittsValue);
 
 
-  if(!empty($donations)) {
-    foreach($donations as $donation) {
-      $donationsPerMont[$donation['month']] = $monthDonations[$donation['month']];
+  // Zeige nur die Donations aus dem Bundesland an.
+  if($resp != 'Admin') {
+    $respDonations = $donations;
+    foreach($respDonations as $key => $val) {
+      if($val['resp'] != $resp) {
+        unset($respDonations[$key]);
+      }
+    }
+
+    if(!empty($respDonations)) {
+      foreach($respDonations as $donation) {
+        $donationsPerMont[$donation['month']] = $monthDonations[$donation['month']];
+      }
+    }
+
+  } else {
+    if(!empty($donations)) {
+      foreach($donations as $donation) {
+        $donationsPerMont[$donation['month']] = $monthDonations[$donation['month']];
+      }
     }
   }
+
+
 
   ?>
 
 
 
   <center>
-    <h3 class="barGraphHeading"><span class="prevYear"><i class="fa fa-chevron-left" aria-hidden="true"></i></span> Spendenübersicht <span class="year">2016</span> <span class="nextYear"><i class="fa fa-chevron-right" aria-hidden="true"></i></span></h3>
+    <h3 class="barGraphHeading"><span class="prevYear"><i class="fa fa-chevron-left" aria-hidden="true"></i></span> Spendenübersicht <?php echo ($resp == 'Admin') ? '' : $resp;?> <span class="year">2016</span> <span class="nextYear"><i class="fa fa-chevron-right" aria-hidden="true"></i></span></h3>
     <div class="barGraphStatistics">
       <?php
 
@@ -144,9 +204,19 @@
   </center>
 
 
+  <!-- data Table -->
+  <!-- TODO Nach Bundesland anzeigen -->
+
   <table id="donationTableMain" class="wp-list-table widefat fixed striped posts">
     <thead>
       <tr>
+        <?php if($resp == 'Admin') {
+          ?>
+            <th scope="col">Bundesland <span class="headerSortDown"><i class="fa fa-arrow-up" aria-hidden="true"></i></span><span class="headerSortUp"><i class="fa fa-arrow-down" aria-hidden="true"></i></span></th>
+          <?php
+        }
+        ?>
+
         <th scope="col">Organisator <span class="headerSortDown"><i class="fa fa-arrow-up" aria-hidden="true"></i></span><span class="headerSortUp"><i class="fa fa-arrow-down" aria-hidden="true"></i></span></th>
         <th scope="col">Spende <span class="headerSortDown"><i class="fa fa-arrow-up" aria-hidden="true"></i></span><span class="headerSortUp"><i class="fa fa-arrow-down" aria-hidden="true"></i></span></th>
         <th scope="col">Ort <span class="headerSortDown"><i class="fa fa-arrow-up" aria-hidden="true"></i></span><span class="headerSortUp"><i class="fa fa-arrow-down" aria-hidden="true"></i></span></th>
@@ -163,16 +233,126 @@
 
       if(!empty($donations)) {
 
-        // Letzte Donations immer als erstes
-        $donationReverse = array_reverse($donations);
+        $donations = array_reverse($donations);
 
-          foreach($donationReverse as $key => $donation) {
+        $page = $_GET['paginierung'];
+        $amountDonations = count($donations);
+
+        $anzahlZuZeigenderSpenden = 9;
+        $allPages = ceil($amountDonations / $anzahlZuZeigenderSpenden);
+
+
+
+
+
+        if(empty($page)) {
+          $page = 1;
+        }
+
+
+        if($amountDonations > $anzahlZuZeigenderSpenden) {
+          $aktuellerIndex = $anzahlZuZeigenderSpenden * $page;
+
+          $startIndexValue = $aktuellerIndex - $anzahlZuZeigenderSpenden;
+
+          $indexNeeded = '';
+
+          $i = 1;
+          for($startIndexValue; $startIndexValue < $aktuellerIndex; $startIndexValue++) {
+
+            $indexNeeded .=  $aktuellerIndex-$i . ',';
+            $i++;
+          }
+          $length = strlen($indexNeeded);
+          $indexNeeded = substr($indexNeeded, 0, $length-1);
+
+
+
+          $indexNeeded = explode(',',$indexNeeded);
+
+
+          foreach($donations as $key => $val) {
+            if(!in_array($key,$indexNeeded)) {
+              unset($donations[$key]);
+            }
+          }
+
+
+        }
+
+
+        $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+        $path = $uri_parts[0];
+        ?>
+        <div class="tablenav">
+          <div class="tablenav-pages">
+            <span class="pagination-links">
+              <?php
+              if($page == "1") {
+                ?>
+                <span class="tablenav-pages-navspan" aria-hidden="true">«</span>
+                <span class="tablenav-pages-navspan" aria-hidden="true">‹</span>
+                <?php
+              } else {
+                $prevPage = $page -1;
+                if($page != "2") {
+                  ?>
+
+                  <a class="first-page" href="<?php echo $path . '?page=pr-breakfast&paginierung=1'?>"><span class="screen-reader-text">Erste Seite</span><span aria-hidden="true">«</span></a>
+                  <?php
+                } else {
+                  ?>
+                  <span class="tablenav-pages-navspan" aria-hidden="true">«</span>
+                  <?php
+                }
+                ?>
+                <a class="prev-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$prevPage?>"><span class="screen-reader-text">Vorherige Seite</span><span aria-hidden="true">‹</span></a>
+                <?php
+              }
+              $nextPage = $page+1;
+              ?>
+              <span><?php echo $page;?> von <?php echo $allPages;?></span>
+              <?php
+              if($page == $allPages) {
+                ?>
+                <span class="tablenav-pages-navspan" aria-hidden="true">›</span>
+                <span class="tablenav-pages-navspan" aria-hidden="true">»</span>
+                <?php
+              } else {
+                ?>
+                <a class="next-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$nextPage?>"><span class="screen-reader-text">Nächste Seite</span><span aria-hidden="true">›</span></a>
+                <?php
+                if($page == $allPages-1) {
+                  ?>
+                  <span class="tablenav-pages-navspan" aria-hidden="true">»</span>
+                  <?php
+                } else {
+                  ?>
+                  <a class="last-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$allPages?>"><span class="screen-reader-text">Letzte Seite</span><span aria-hidden="true">»</span></a>
+                  <?php
+                }
+              }
+              ?>
+            </span>
+          </div>
+        </div>
+        <?php
+
+
+          foreach($donations as $key => $donation) {
             ?>
             <tr>
+              <?php if($resp == 'Admin') {
+                ?>
+                <td>
+                  <?php echo $donation['resp']?>
+                </td>
+                <?php
+              }
+              ?>
               <td>
                 <span class="text"><?php echo $donation['orga']?></span>
                 <span class="editInput"><input type="text" name="prb_donations[<?php echo $key;?>][orga]" value="<?php echo $donation['orga']; ?>" /></span>
-
               </td>
               <td>
                 <span class="text"><?php echo $donation['value']?></span>
@@ -208,6 +388,14 @@
 
     <tfoot>
       <tr>
+        <?php if($resp == 'Admin') {
+          ?>
+          <th scope="col">Bundesland</th>
+          <?php
+        }
+        ?>
+
+
         <th scope="col">Organisator</th>
         <th scope="col">Spende</th>
         <th scope="col">Ort</th>
@@ -217,6 +405,60 @@
       </tr>
     </tfoot>
   </table>
+  <div class="tablenav">
+    <div class="tablenav-pages">
+      <span class="pagination-links">
+        <?php
+        if($page == "1") {
+          ?>
+          <span class="tablenav-pages-navspan" aria-hidden="true">«</span>
+          <span class="tablenav-pages-navspan" aria-hidden="true">‹</span>
+          <?php
+        } else {
+          $prevPage = $page -1;
+          if($page != "2") {
+            ?>
+
+            <a class="first-page" href="<?php echo $path . '?page=pr-breakfast&paginierung=1'?>"><span class="screen-reader-text">Erste Seite</span><span aria-hidden="true">«</span></a>
+            <?php
+          } else {
+            ?>
+            <span class="tablenav-pages-navspan" aria-hidden="true">«</span>
+            <?php
+          }
+          ?>
+          <a class="prev-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$prevPage?>"><span class="screen-reader-text">Vorherige Seite</span><span aria-hidden="true">‹</span></a>
+          <?php
+        }
+        $nextPage = $page+1;
+        ?>
+        <span><?php echo $page;?> von <?php echo $allPages;?></span>
+        <?php
+        if($page == $allPages) {
+          ?>
+          <span class="tablenav-pages-navspan" aria-hidden="true">›</span>
+          <span class="tablenav-pages-navspan" aria-hidden="true">»</span>
+          <?php
+        } else {
+          ?>
+          <a class="next-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$nextPage?>"><span class="screen-reader-text">Nächste Seite</span><span aria-hidden="true">›</span></a>
+          <?php
+          if($page == $allPages-1) {
+            ?>
+            <span class="tablenav-pages-navspan" aria-hidden="true">»</span>
+            <?php
+          } else {
+            ?>
+            <a class="last-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$allPages?>"><span class="screen-reader-text">Letzte Seite</span><span aria-hidden="true">»</span></a>
+            <?php
+          }
+        }
+        ?>
+      </span>
+    </div>
+  </div>
+
+
   <p class="submit editDonationSaveButton">
   	<input type="submit" name="submit" id="submit" class="button button-primary" value="<?php _e('Änderungen speichern','prbreakfast'); ?>"  />
   </p>
