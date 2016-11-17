@@ -1,11 +1,10 @@
 
+.prb_footerspace {
+	
+	margin-left: 70px;
+}
 
-
-
-
-
-
-
+.icon-menu { color: #000; }
 
 
 /*
@@ -17,8 +16,6 @@
 	-webkit-transition: all 300ms ease-in-out;
 	transition: all 300ms ease-in-out;
 }
-
-
 
 .prb_form_container .prb_form input.prb_input {
 
@@ -40,8 +37,6 @@
 	outline: none;
 	background-size: 100% 100%;
 	background-color: #fff !important;
-
-
 }
 
 .prb_form_container .prb_form input.prb_input:focus::-webkit-input-placeholder {
@@ -55,6 +50,7 @@
 
 }
 
+/* Die Selectbox */
 
 .prb_form_select {
 
@@ -73,6 +69,7 @@
 	appearance: none;
 }
 
+/* Die Form Checkbox*/
 
 .prb_form_checkbox {
 
@@ -113,6 +110,7 @@ input[type=checkbox]:checked + .prb_form_btn:before { left: 22px; }
 
 input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 
+/* Checkbox Beschreibung */
 
 .prb_form_checkbox label {
 
@@ -121,7 +119,7 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 	font-size: 13px;
 }
 
-
+/* Senden Button */
 
 #prb_form_send {
 
@@ -146,4 +144,64 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 
 /*
 * End Form *
+*/
+
+
+
+
+
+
+/*
+* Mobile Anpassungen
+*/
+
+
+/*Für Mobilphones bis 600 Pixel*/
+
+@media screen and (max-width: 600px) {
+	
+	h2 { font-size: 21px !important;}	
+	.prb_form_container .prb_form input.prb_input { margin: 2% 0 0 0; }
+	.prb_form_select { margin: 2% 0 0 0; }
+	.prb_form_checkbox { margin: 15px 0 0 0; }
+	#prb_form_checkboxid { margin-left: 48px;}
+	.prb_form_btn { margin-right: 24px; }
+	
+	.prb_footerspace { margin-left: 0; }
+	.prb_footerspace img { width: 80px;}
+	
+	#Footer {
+		text-align:center;
+	}
+	
+	.icon-search { display:none; }
+	}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+	
+	.prb_form_container .prb_form input.prb_input { margin: 1% 0% 0 16%; width: auto; }
+	.prb_form_select { margin: 1% 11% 0 16%; }
+	.prb_form_checkbox { margin: 3% 0% 0% 16%; }
+	.prb_footerspace img { display:none;}
+	.prb_footerspace { margin-left: 0; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+* Ende der Mobilen Anpassungen *
 */
