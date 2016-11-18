@@ -177,29 +177,14 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 	.icon-search { display:none; }
 	}
 
-@media screen and (min-width: 600px) and (max-width: 800px) {
+@media screen and (min-width: 600px) and (max-width: 1239px) {
 	
-	.prb_form_container .prb_form input.prb_input { margin: 1% 0% 0 16%; width: auto; }
-	.prb_form_select { margin: 1% 11% 0 16%; }
-	.prb_form_checkbox { margin: 3% 0% 0% 16%; }
+	.prb_form_container .prb_form input.prb_input { margin: 1% 0% 0 8%; width: 39%; }
+	.prb_form_select { margin: 1% 11% 0 8%; width: 39%;}
+	.prb_form_checkbox { margin: 3% 0% 0% 10%; }
 	.prb_footerspace img { display:none;}
 	.prb_footerspace { margin-left: 0; }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*
