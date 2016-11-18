@@ -45,7 +45,7 @@
 
 
   $donations = $this->options['prb_donations'];
-  $donations = array_reverse($donations);
+  //$donations = array_reverse($donations);
 
 
   //var_dump($donations);

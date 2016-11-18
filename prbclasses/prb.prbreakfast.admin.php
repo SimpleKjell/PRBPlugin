@@ -122,26 +122,33 @@ class PRBAdmin extends PRBCommon
   function save_new_donations($newDonations)
   {
 
+
     $settings = get_option('prbreakfast_options');
     $oldDonations = $settings['prb_donations'];
-    $oldDonations = array_reverse($oldDonations);
+
 
     if(isset($_POST['add_new_donation'])) {
 
-      $oldDonations = array_merge($oldDonations, $newDonations);
+      $arrayKickedByOne = array();
+      foreach($oldDonations as $key => $toBeKicked) {
+        $arrayKickedByOne[$key+1] = $toBeKicked;
+      }
+
+      $oldDonations = array_merge($newDonations,$arrayKickedByOne);
 
     } else {
 
       //var_dump($oldDonations);
       foreach($oldDonations as $key => $donations) {
         if(array_key_exists($key, $newDonations)) {
+          //var_dump($key);
             $oldDonations[$key] = $newDonations[$key];
         }
       }
 
     }
 
-    $oldDonations = array_reverse($oldDonations);
+
     $settings['prb_donations'] = $oldDonations;
 
     update_option('prbreakfast_options', $settings);
@@ -172,7 +179,13 @@ class PRBAdmin extends PRBCommon
 
      $this->options = get_option('prbreakfast_options');
 
-     echo '<div class="updated"><p><strong>'.__('Einstellungen gespeichert.','sfgewinnspiel').'</strong></p></div>';
+
+     if(isset($_POST['add_new_donation'])) {
+       echo '<div class="updated"><p><strong>'.__('Spende hinzugefügt.','prbreakfast').'</strong></p></div>';
+     } else {
+        echo '<div class="updated"><p><strong>'.__('Spenden aktualisiert.','prbreakfast').'</strong></p></div>';
+     }
+
    }
 
    /*

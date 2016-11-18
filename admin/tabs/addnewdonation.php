@@ -1,6 +1,6 @@
 
 
-<h3><?php _e('Neue Spende hinzufügen','sfgewinnspiel'); ?></h3>
+
 <form method="post" action="">
   <input type="hidden" name="update_settings" />
   <?php wp_nonce_field( 'update_settings', 'prb_nonce_check' ); ?>
@@ -65,11 +65,12 @@
   if(!empty($donations)) {
     end($donations);
     $lastKey = key($donations);
-    $nextKey = $lastKey + 1;
+    //$nextKey = $lastKey + 1;
+    $nextKey = 0;
   } else {
-    $nextKey = 1;
+    //$nextKey = 1;
+    $nextKey = 0;
   }
-
 
   ?>
 
@@ -93,13 +94,14 @@
 
   </div>
   <input type="hidden" name="add_new_donation" value="ye"/>
-  <div class="wrap">
-    <div class="field">
+  <div class="marginTopMedium spendenAddBox postbox wrap">
+
+    <h3><?php _e('Neue Spende hinzufügen','prbreakfast'); ?> </h3>
+
+
+    <div class="marginTopMedium field">
       <label for="orga" >Organisator</label>
       <input value="" name="prb_donations[<?php echo $nextKey;?>][orga]" id="orga" type="text" />
-    </div>
-    <div class="field">
-
     </div>
     <div class="field">
       <label for="donation" >Spende</label>
@@ -122,8 +124,31 @@
         <option value="<?php echo date("M Y", strtotime("first day of previous month"));?>"><?php echo date("M Y", strtotime("first day of previous month"));?></option>
       </select>
     </div>
+    <?php if($resp == 'Admin') {
+      ?>
+      <div class="field">
+        <label for="bundesland">Bundesland</label>
+        <select id="bundesland" name="prb_donations[<?php echo $nextKey;?>][resp]">
+          <option value="Burgenland">Burgenland</option>
+          <option value="Oberösterreich">Oberösterreich</option>
+          <option value="Tirol">Tirol</option>
+          <option value="Kärnten">Kärnten</option>
+          <option value="Salzburg">Salzburg</option>
+          <option value="Vorarlberg">Vorarlberg</option>
+          <option value="Niederösterreich">Niederösterreich</option>
+          <option value="Steiermark">Steiermark</option>
+          <option value="Wien">Wien</option>
+        </select>
+      </div>
+      <?php
+    } else {
+      ?>
+        <input type="hidden" name="prb_donations[<?php echo $nextKey;?>][resp]" value="<?php echo $resp;?>"
+      <?php
+    }
+    ?>
 
-    <input type="hidden" name="prb_donations[<?php echo $nextKey;?>][resp]" value="<?php echo $resp;?>"
+
   </div>
 
 

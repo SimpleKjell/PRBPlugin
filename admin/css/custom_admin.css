@@ -70,3 +70,29 @@
 /*
 * END Main Donation Table
 */
+/*
+* START Add Donation
+*/
+.spendenAddBox {
+  padding: 30px;
+}
+.spendenAddBox .field {
+  width: 326px;
+  margin-bottom: 15px;
+}
+.spendenAddBox .field label {
+  width: 120px;
+  display: inline-block;
+  font-size: 16px;
+}
+.spendenAddBox .field input, .spendenAddBox .field select{
+  display: inline-block;
+  width: 200px;
+  padding: 10px;
+}
+.spendenAddBox .field input[type="number"], .spendenAddBox .field select {
+  height: 41px;
+}
+/*
+* END Add Donation
+*/
