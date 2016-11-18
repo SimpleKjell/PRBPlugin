@@ -56,6 +56,8 @@ PRBFrontEnd.prototype = {
 						 nonce : nonce
 					},
 					beforeSend: function( xhr ) {
+						jQuery('.prb_form_container').append('<div class="xhrWait"><center><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><br /><br />Deine Anfrage wird bearbeitet. Bitte habe ein wenig Geduld.</center></div>');
+						jQuery('.prb_form').hide();
 						//jQuery(that).parent().append('<center><i style="font-size: 14px;color:#EA4E92;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> wird bearbeitet</center>');
 						//jQuery('.edit, .close, .delete').remove();
 					},
@@ -66,7 +68,8 @@ PRBFrontEnd.prototype = {
 			})
 
 			sendMails.done(function(response) {
-				console.log(response);
+				jQuery('.prb_form').hide();
+				jQuery('.xhrWait').remove();
 			})
 
 

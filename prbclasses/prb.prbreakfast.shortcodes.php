@@ -47,51 +47,95 @@ class PRBshortCode {
     $bundesland =  $_REQUEST['bundesland'];
 
 
-    echo $vorname;
-    echo $nachname;
-    echo $mail;
-    echo $tel;
-    echo $bundesland;
 
 
     switch ($bundesland) {
       case 'burgenland':
         $mailTo = 'office@krebshilfe-bgld.at';
+        $confirmationTextId = 'Burgenland';
         break;
       case 'oberoesterreich':
         $mailTo = 'office@krebshilfe-ooe.at';
+        $confirmationTextId = 'Oberösterreich';
         break;
       case 'tirol':
         $mailTo = 'krebshilfe@i-med.ac.at';
+        $confirmationTextId = 'Tirol';
         break;
       case 'kaernten':
         $mailTo = 'office@krebshilfe-ktn.at';
+        $confirmationTextId = 'Kärnten';
         break;
       case 'salzburg':
         $mailTo = 'office@krebshilfe-sbg.at';
+        $confirmationTextId = 'Salzburg';
         break;
       case 'voralberg':
         $mailTo = 'office@krebshilfe-vbg.at';
+        $confirmationTextId = 'Vorarlberg';
         break;
       case 'niederoesterreich':
         $mailTo = 'krebshilfe@krebshilfe-noe.at';
+        $confirmationTextId = 'Niederösterreich';
         break;
       case 'steiermark':
         $mailTo = 'office@krebshilfe.at';
+        $confirmationTextId = 'Steiermark';
         break;
       case 'wien':
         $mailTo = 'service@krebshilfe-wien.at';
+        $confirmationTextId = 'Wien';
         break;
       default:
         $mailTo = 'service@krebshilfe.net';
         break;
     }
-    $koordinatorMail = 'service@krebshilfe.net';
+    $advisorMail = 'service@krebshilfe.net';
 
-    // Testmail
+    // Testmails
+    $advisorMail = 'kjell.weibrecht@hotmail.de';
     $mailTo = 'kjell@simplefox.de';
 
-    
+    $mailToArray = array($mailTo, $advisorMail);
+    $subject = 'Pink Ribbon Breakfast Anfrage';
+    $message = $vorname . ' ' . $nachname . ' möchte Pink Ribbon Breakfast organisieren.';
+    $message .= '<br /><br />';
+    $message .= 'Kontaktdaten:';
+    $message .= '<br />';
+    $message .= 'Vorname: ' . $vorname;
+    $message .= '<br />';
+    $message .= 'Nachname: ' . $nachname;
+    $message .= '<br />';
+    $message .= 'Telefon: ' . $tel;
+    $message .= '<br />';
+    $message .= 'E-Mail: ' . $mail;
+    $message .= 'Bundesland: ' . $bundesland;
+
+    // Html in Mails erlauben
+    add_filter('wp_mail_content_type',create_function('', 'return "text/html"; '));
+
+    // Mail an den Zuständigen im Bundesland und den Advisor
+    $mailSent = wp_mail($mailToArray, $subject, $message);
+
+
+    // Bestätigungsmail für den User
+    $respondTo = $mail;
+    $subject = 'Bestätigungsmail Pink Ribbon Breakfast';
+
+
+
+
+
+    $message = $this->options['confirmationMail'.$confirmationTextId];
+
+    if(empty($message)) {
+      $message = 'Dies ist eine autmatisierte Antwortmail. <br /> Vielen Dank für Dein Interesse. Pink Ribbon Breakfast wird sich mit Dir in Verbindung setzen. <br/> Mit freundlichen Grüßen, <br/> Pink Ribbon Breakfast';
+    }
+
+    $mailSent = wp_mail($respondTo, $subject, $message);
+
+
+    echo $mailSent;
 
     die();
   }

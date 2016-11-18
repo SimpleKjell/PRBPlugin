@@ -5,44 +5,7 @@
 
 
   <?php
-  $currUser = wp_get_current_user();
-
-  switch ($currUser->user_email) {
-    case 'office@krebshilfe-bgld.at':
-      $resp = 'Burgenland';
-      break;
-    case 'office@krebshilfe-ooe.at':
-      $resp = 'Oberösterreich';
-      break;
-    case 'krebshilfe@i-med.ac.at':
-      $resp = 'Tirol';
-      break;
-    case 'office@krebshilfe-ktn.at':
-      $resp = 'Kärnten';
-      break;
-    case 'office@krebshilfe-sbg.at':
-      $resp = 'Salzburg';
-      break;
-    case 'office@krebshilfe-vbg.at':
-      $resp = 'Vorarlberg';
-      break;
-    case 'krebshilfe@krebshilfe-noe.at':
-      $resp = 'Niederösterreich';
-      break;
-    case 'office@krebshilfe.at':
-      $resp = 'Steiermark';
-      break;
-    case 'service@krebshilfe-wien.at':
-      $resp = 'Wien';
-      break;
-    case 'service@krebshilfe.net':
-      $resp = 'Admin';
-      break;
-    default:
-      $resp = 'Admin';
-      break;
-  }
-
+  $resp = $this->getResponsiblePerson();
 
   $donations = $this->options['prb_donations'];
   //$donations = array_reverse($donations);

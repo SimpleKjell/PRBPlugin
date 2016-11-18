@@ -182,8 +182,10 @@ class PRBAdmin extends PRBCommon
 
      if(isset($_POST['add_new_donation'])) {
        echo '<div class="updated"><p><strong>'.__('Spende hinzugefügt.','prbreakfast').'</strong></p></div>';
+     } else if(isset($_POST['confirmation_mail_tab'])) {
+       echo '<div class="updated"><p><strong>'.__('Einstellungen gespeichert.','prbreakfast').'</strong></p></div>';
      } else {
-        echo '<div class="updated"><p><strong>'.__('Spenden aktualisiert.','prbreakfast').'</strong></p></div>';
+       echo '<div class="updated"><p><strong>'.__('Spenden aktualisiert.','prbreakfast').'</strong></p></div>';
      }
 
    }
@@ -266,7 +268,7 @@ class PRBAdmin extends PRBCommon
    $this->tabs = array(
      'main' => __('Dashboard', 'prbreakfast'),
      'addnewdonation' => __('Neue Spende eintragen', 'prbreakfast'),
-     //'administration' => __('Administration', 'dsdfmembers'),
+     'responsemail' => __('Bestätigungsmail', 'prbreakfast'),
      //'export' => __('Export', 'dsdfmembers'),
      //'specialrewards' => __('Special Rewards', 'investusers'),
      //'permalinks' => __('Permalinks','sfmusiker'),
@@ -274,7 +276,7 @@ class PRBAdmin extends PRBCommon
    );
 
    $this->default_tab = 'main';
- }
+ } 
 
 
 }
