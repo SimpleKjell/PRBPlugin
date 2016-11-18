@@ -45,14 +45,25 @@
 
 
   $donations = $this->options['prb_donations'];
+  $donations = array_reverse($donations);
 
 
+  //var_dump($donations);
 
-  // Nach dem Speichern nimm die Post Variablen
-  if(!empty($_POST)) {
-    $donations = $_POST['prb_donations'];
-    $donations = array_reverse($donations);
+  // Zeige nur die Donations aus dem Bundesland an.
+  if($resp != 'Admin') {
+    foreach($donations as $key => $val) {
+      if($val['resp'] != $resp) {
+        unset($donations[$key]);
+      }
+    }
   }
+  //var_dump($donations);
+  // Nach dem Speichern nimm die Post Variablen
+  //if(!empty($_POST)) {
+  //  $donations = $_POST['prb_donations'];
+  //  $donations = array_reverse($donations);
+  //}
 
 
 
@@ -83,29 +94,11 @@
   $gesamtDurchschnitt = $gesamtDurchschnittsValue / count($durchschnittsValue);
 
 
-  // Zeige nur die Donations aus dem Bundesland an.
-  if($resp != 'Admin') {
-    $respDonations = $donations;
-    foreach($respDonations as $key => $val) {
-      if($val['resp'] != $resp) {
-        unset($respDonations[$key]);
-      }
-    }
-
-    if(!empty($respDonations)) {
-      foreach($respDonations as $donation) {
-        $donationsPerMont[$donation['month']] = $monthDonations[$donation['month']];
-      }
-    }
-
-  } else {
-    if(!empty($donations)) {
-      foreach($donations as $donation) {
-        $donationsPerMont[$donation['month']] = $monthDonations[$donation['month']];
-      }
+  if(!empty($donations)) {
+    foreach($donations as $donation) {
+      $donationsPerMont[$donation['month']] = $monthDonations[$donation['month']];
     }
   }
-
 
 
   ?>
@@ -233,8 +226,6 @@
 
       if(!empty($donations)) {
 
-        $donations = array_reverse($donations);
-
         $page = $_GET['paginierung'];
         $amountDonations = count($donations);
 
@@ -346,7 +337,12 @@
                 ?>
                 <td>
                   <?php echo $donation['resp']?>
+                  <span class="editInput"><input type="hidden" name="prb_donations[<?php echo $key;?>][resp]" value="<?php echo $donation['resp']; ?>" /></span>
                 </td>
+                <?php
+              } else {
+                ?>
+                <input type="hidden" name="prb_donations[<?php echo $key;?>][resp]" value="<?php echo $donation['resp']; ?>" />
                 <?php
               }
               ?>

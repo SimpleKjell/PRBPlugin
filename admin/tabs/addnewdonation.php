@@ -56,10 +56,10 @@
   }
 
   // Nach dem Speichern nimm die Post Variablen
-  if(!empty($_POST)) {
-    $donations = $_POST['prb_donations'];
-    $donations = array_reverse($donations);
-  }
+  //if(!empty($_POST)) {
+  //  $donations = $_POST['prb_donations'];
+  //  $donations = array_reverse($donations);
+  //}
 
 
   if(!empty($donations)) {
@@ -77,7 +77,7 @@
     <?php
     if(!empty($donations)) {
 
-      foreach($donations as $key => $donation) {
+      /*foreach($donations as $key => $donation) {
 
         ?>
         <input type="text" name="prb_donations[<?php echo $key;?>][orga]" value="<?php echo $donation['orga'];?>" />
@@ -87,12 +87,12 @@
         <input type="text" name="prb_donations[<?php echo $key;?>][month]" value="<?php echo $donation['month'];?>" />
         <input type="text" name="prb_donations[<?php echo $key;?>][resp]" value="<?php echo $donation['resp'];?>" />
         <?php
-      }
+      }*/
     }
     ?>
 
   </div>
-
+  <input type="hidden" name="add_new_donation" value="ye"/>
   <div class="wrap">
     <div class="field">
       <label for="orga" >Organisator</label>
