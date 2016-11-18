@@ -135,9 +135,9 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 	transform: translateX(-50%);
 }
 
-#prb_form_send:hover {
+#prb_form_send:hover, #prb_form_send:focus {
 
-	background: #EB6CA3;
+	background: #EB6CA3 !important;
 	color: #fff;
 
 }
