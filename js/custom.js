@@ -70,6 +70,7 @@ PRBFrontEnd.prototype = {
 			sendMails.done(function(response) {
 				jQuery('.prb_form').hide();
 				jQuery('.xhrWait').remove();
+				jQuery('.prb_form_abschlusscreen').show();
 			})
 
 

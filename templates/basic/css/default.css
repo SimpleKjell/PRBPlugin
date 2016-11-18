@@ -1,6 +1,6 @@
 
 .prb_footerspace {
-	
+
 	margin-left: 70px;
 }
 
@@ -81,7 +81,7 @@
 #prb_form_checkboxid { opacity: 0; }
 
 .prb_form_btn {
-	
+
 	float:left;
 	width: 40px;
 	height: 20px;
@@ -91,7 +91,7 @@
 }
 
 .prb_form_btn:before {
-	
+
 	content: "";
 	position: absolute;
 	height: 16px;
@@ -101,7 +101,7 @@
 	top: 2px;
 	transition: all 150ms ease-out;
 	border-radius: 10px;
-	
+
 }
 
 /*Funktion um die Checkbox zu switchen*/
@@ -145,17 +145,16 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 
 /* Abschlussmeldung */
 
-.prb_form_abschlusscreen {
-	
-	margin-top: 4%;
+.prb_form_abschlusscreen {	
 	text-align: center;
+	display: none;
 }
 
 .prb_form_abschlusscreen span {
-	
+
 	color: #EB6CA3;
 	font-weight: 600;
-} 
+}
 
 /*
 * End Form *
@@ -170,28 +169,28 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 /*Für Mobilphones bis 600 Pixel*/
 
 @media screen and (max-width: 600px) {
-	
-	h2 { font-size: 21px !important;}	
+
+	h2 { font-size: 21px !important;}
 	.prb_form_container .prb_form input.prb_input { margin: 2% 0 0 0; }
 	.prb_form_select { margin: 2% 0 0 0; }
 	.prb_form_checkbox { margin: 15px 0 0 0; }
 	#prb_form_checkboxid { margin-left: 48px;}
 	.prb_form_btn { margin-right: 24px; }
-	
+
 	.prb_footerspace { margin-left: 0; }
 	.prb_footerspace img { width: 80px;}
-	
+
 	#Footer {
 		text-align:center;
 	}
-	
+
 	.icon-search { display:none; }
 	}
 
  /* Für alle Geräte die Größer sind bis 1239px */
 
 @media screen and (min-width: 600px) and (max-width: 1239px) {
-	
+
 	.prb_form_container .prb_form input.prb_input { margin: 1% 0% 0 8%; width: 39%; }
 	.prb_form_select { margin: 1% 11% 0 8%; width: 39%;}
 	.prb_form_checkbox { margin: 3% 0% 0% 10%; }
@@ -203,7 +202,3 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 /*
 * Ende der Mobilen Anpassungen *
 */
-
-
- 
-
