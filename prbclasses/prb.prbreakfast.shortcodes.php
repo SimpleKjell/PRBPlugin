@@ -21,9 +21,27 @@ class PRBshortCode {
 	function sfgewinnspiel_shortcodes()
 	{
     // Frontend Form
-    add_shortcode( 'prbreakfast_form', array(&$this,'prbreakfast_form_function') );   
+    add_shortcode( 'prbreakfast_form', array(&$this,'prbreakfast_form_function') );
+
+    // Frontend GoalProgress
+    add_shortcode( 'prbreakfast_donation_progress', array(&$this,'prbreakfast_donation_progress_function') );
 
 	}
+
+  public function prbreakfast_donation_progress_function($atts)
+  {
+    ob_start();
+    ?>
+
+
+    <div id="sample_goal"></div>
+
+
+    <?php
+    //assign the file output to $content variable and clean buffer
+		$content = ob_get_clean();
+		return  $content;
+  }
 
   public function prbreakfast_form_function($atts)
   {
@@ -38,7 +56,7 @@ class PRBshortCode {
     		<div class="clear"></div>
     		<select class="prb_form_select">
     			<option velue="waehle">
-    				Wähle dein Bundesland 
+    				Wähle dein Bundesland
     			</option>
     			<option velue="burgenland">
     				Burgenland
@@ -68,10 +86,10 @@ class PRBshortCode {
     				Wien
     			</option>
     		</select>
-    		
+
     		<div class="prb_form_checkbox"><label for="prb_form_checkboxid"><input id="prb_form_checkboxid" type="checkbox" name="newsletter" value="newsletter">Ich darf vom Krebshilfeteam in meiner Nähe kontaktiert werden.<div class="prb_form_btn"></div></label></div>
     		<div class="clear"></div><input class="prb_input" type="submit" value="absenden" id="prb_form_send">
-    		
+
     	</form>
     </div>
     <?php

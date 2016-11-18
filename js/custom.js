@@ -17,6 +17,19 @@ PRBFrontEnd.prototype = {
 	init:function () {
 		/* Aufrufen von wichtigen Funktionen */
 		this.formSubmit();
+		this.goalProgress();
+	},
+	goalProgress: function() {
+
+
+		jQuery('#sample_goal').goalProgress({
+        goalAmount: 150,
+        currentAmount: 100,
+        //textBefore: '$',
+        textAfter: ' € von 1000€ gesammelt'
+    });
+
+
 	},
 	formSubmit: function() {
 		jQuery('.prb_form').submit(function(evt) {
@@ -24,7 +37,7 @@ PRBFrontEnd.prototype = {
 			// Validierung hier
 
 
-			
+
 
 			return false;
 		})

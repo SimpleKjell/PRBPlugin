@@ -127,6 +127,16 @@ class PRBreakfast
 		wp_localize_script( 'prb-custom-js', 'Custom', array('ajaxurl'  => admin_url( 'admin-ajax.php' ),'homeurl' => home_url(), 'upload_url' => admin_url('async-upload.php')));
 		wp_enqueue_script('prb-custom-js');
 
+    // GoalProgress JS
+    wp_register_script('goal-progress-js', sfprbreakfast_url.'libs/goalProgress/goalProgress.min.js',array('jquery'));
+		wp_enqueue_script('goal-progress-js');
+
+    // GoalProgress CSS
+    wp_register_style( 'goal_progress_style', sfprbreakfast_url.'libs/goalProgress/goalProgress.css');
+		wp_enqueue_style('goal_progress_style');
+
+
+
 
 	}
 }
