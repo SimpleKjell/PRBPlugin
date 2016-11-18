@@ -79,26 +79,28 @@
       $monthDonations[$donation['month']] += $donation['value'];
       $donationAmount[$donation['month']] += 1;
     }
-  }
 
+    // durchschnittsValue pro Monat
+    foreach($monthDonations as $month => $val) {
+      $durchschnittsValue[$month] = $val / $donationAmount[$month];
+    }
+    $gesamtDurchschnittsValue = 0;
 
-  // durchschnittsValue pro Monat
-  foreach($monthDonations as $month => $val) {
-    $durchschnittsValue[$month] = $val / $donationAmount[$month];
-  }
-  $gesamtDurchschnittsValue = 0;
-  // Durchschnittswert über alle Monate
-  foreach($durchschnittsValue as $durchschnitt) {
-    $gesamtDurchschnittsValue += $durchschnitt;
-  }
-  $gesamtDurchschnitt = $gesamtDurchschnittsValue / count($durchschnittsValue);
+    // Durchschnittswert über alle Monate
+    foreach($durchschnittsValue as $durchschnitt) {
+      $gesamtDurchschnittsValue += $durchschnitt;
+    }
+    $gesamtDurchschnitt = $gesamtDurchschnittsValue / count($durchschnittsValue);
 
-
-  if(!empty($donations)) {
     foreach($donations as $donation) {
       $donationsPerMont[$donation['month']] = $monthDonations[$donation['month']];
     }
+
   }
+
+
+
+
 
 
   ?>
@@ -110,71 +112,73 @@
     <div class="barGraphStatistics">
       <?php
 
+      if(!empty($donations)) {
 
-      // Vorab sollte das Jahr getrennt werden
-      $months = '';
-      $dntValues = '';
-      foreach($donationsPerMont as $monthDonation => $value) {
+        // Vorab sollte das Jahr getrennt werden
+        $months = '';
+        $dntValues = '';
+        foreach($donationsPerMont as $monthDonation => $value) {
 
-        preg_match_all('!\d+!', $monthDonation, $matches);
-        $var = implode(' ', $matches[0]);
+          preg_match_all('!\d+!', $monthDonation, $matches);
+          $var = implode(' ', $matches[0]);
 
-        if(!isset($year[$var])) {
+          if(!isset($year[$var])) {
+              $pureMonth = trim(preg_replace('/[0-9]+/', '', $monthDonation));
+              $year[$var] = array($pureMonth => $value);
+          } else {
             $pureMonth = trim(preg_replace('/[0-9]+/', '', $monthDonation));
-            $year[$var] = array($pureMonth => $value);
-        } else {
-          $pureMonth = trim(preg_replace('/[0-9]+/', '', $monthDonation));
-          $year[$var] = array_merge($year[$var], array($pureMonth => $value));
+            $year[$var] = array_merge($year[$var], array($pureMonth => $value));
+          }
+
+          $months .= $monthDonation .',';
+          $dntValues .= $value. ',';
+
         }
-
-        $months .= $monthDonation .',';
-        $dntValues .= $value. ',';
-
-      }
-      $length = strlen($months);
-      $months = substr($months, 0, $length -1);
-      $length = strlen($dntValues);
-      $dntValues = substr($dntValues, 0, $length -1);
+        $length = strlen($months);
+        $months = substr($months, 0, $length -1);
+        $length = strlen($dntValues);
+        $dntValues = substr($dntValues, 0, $length -1);
 
 
 
 
-      // Für jedes Jahr sind nun mit Monat => Value alle Daten erfasst
-      // Nun aufbereiten fürs js
-      $dntValues = '';
-      foreach($year as $year => $val) {
+        // Für jedes Jahr sind nun mit Monat => Value alle Daten erfasst
+        // Nun aufbereiten fürs js
+        $dntValues = '';
+        foreach($year as $year => $val) {
 
 
-      $dntValues .= (array_key_exists('Jan',$val)) ? $val['Jan'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Feb',$val)) ? $val['Feb'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Mar',$val)) ? $val['Mar'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Apr',$val)) ? $val['Apr'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('May',$val)) ? $val['May'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Jun',$val)) ? $val['Jun'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Jul',$val)) ? $val['Jul'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Aug',$val)) ? $val['Aug'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Sep',$val)) ? $val['Sep'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Oct',$val)) ? $val['Oct'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Nov',$val)) ? $val['Nov'] : '0';
-      $dntValues .= ',';
-      $dntValues .= (array_key_exists('Dec',$val)) ? $val['Dec'] : '0';
+        $dntValues .= (array_key_exists('Jan',$val)) ? $val['Jan'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Feb',$val)) ? $val['Feb'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Mar',$val)) ? $val['Mar'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Apr',$val)) ? $val['Apr'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('May',$val)) ? $val['May'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Jun',$val)) ? $val['Jun'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Jul',$val)) ? $val['Jul'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Aug',$val)) ? $val['Aug'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Sep',$val)) ? $val['Sep'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Oct',$val)) ? $val['Oct'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Nov',$val)) ? $val['Nov'] : '0';
+        $dntValues .= ',';
+        $dntValues .= (array_key_exists('Dec',$val)) ? $val['Dec'] : '0';
 
-      ?>
-      <div class="hidden" id="graphData<?php echo $year;?>" data-graphValues="<?php echo $dntValues;?>" ></div>
-      <?php
+        ?>
+        <div class="hidden" id="graphData<?php echo $year;?>" data-graphValues="<?php echo $dntValues;?>" ></div>
+        <?php
 
-      $dntValues = '';
+        $dntValues = '';
 
+        }
       }
 
 
@@ -183,15 +187,22 @@
 
 
     </div>
-    <div style="padding: 1cm 4cm 1cm 4cm;">
-      <div class="canvas_container">
-        <canvas id="canvas" width="900" height="300"></canvas>
-      </div>
+    <?php
+    if(!empty($donations)) {
+      ?>
+      <div style="padding: 1cm 4cm 1cm 4cm;">
+        <div class="canvas_container">
+          <canvas id="canvas" width="900" height="300"></canvas>
+        </div>
 
-      <script>
-        PRBAdmin.prototype.barGraph();
-      </script>
-    </div>
+        <script>
+          PRBAdmin.prototype.barGraph();
+        </script>
+      </div>
+      <?php
+    }
+    ?>
+
 
 
   </center>
@@ -401,58 +412,65 @@
       </tr>
     </tfoot>
   </table>
-  <div class="tablenav">
-    <div class="tablenav-pages">
-      <span class="pagination-links">
-        <?php
-        if($page == "1") {
-          ?>
-          <span class="tablenav-pages-navspan" aria-hidden="true">«</span>
-          <span class="tablenav-pages-navspan" aria-hidden="true">‹</span>
+  <?php
+  if(!empty($donations)) {
+    ?>
+    <div class="tablenav">
+      <div class="tablenav-pages">
+        <span class="pagination-links">
           <?php
-        } else {
-          $prevPage = $page -1;
-          if($page != "2") {
-            ?>
-
-            <a class="first-page" href="<?php echo $path . '?page=pr-breakfast&paginierung=1'?>"><span class="screen-reader-text">Erste Seite</span><span aria-hidden="true">«</span></a>
-            <?php
-          } else {
+          if($page == "1") {
             ?>
             <span class="tablenav-pages-navspan" aria-hidden="true">«</span>
+            <span class="tablenav-pages-navspan" aria-hidden="true">‹</span>
+            <?php
+          } else {
+            $prevPage = $page -1;
+            if($page != "2") {
+              ?>
+
+              <a class="first-page" href="<?php echo $path . '?page=pr-breakfast&paginierung=1'?>"><span class="screen-reader-text">Erste Seite</span><span aria-hidden="true">«</span></a>
+              <?php
+            } else {
+              ?>
+              <span class="tablenav-pages-navspan" aria-hidden="true">«</span>
+              <?php
+            }
+            ?>
+            <a class="prev-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$prevPage?>"><span class="screen-reader-text">Vorherige Seite</span><span aria-hidden="true">‹</span></a>
             <?php
           }
+          $nextPage = $page+1;
           ?>
-          <a class="prev-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$prevPage?>"><span class="screen-reader-text">Vorherige Seite</span><span aria-hidden="true">‹</span></a>
+          <span><?php echo $page;?> von <?php echo $allPages;?></span>
           <?php
-        }
-        $nextPage = $page+1;
-        ?>
-        <span><?php echo $page;?> von <?php echo $allPages;?></span>
-        <?php
-        if($page == $allPages) {
-          ?>
-          <span class="tablenav-pages-navspan" aria-hidden="true">›</span>
-          <span class="tablenav-pages-navspan" aria-hidden="true">»</span>
-          <?php
-        } else {
-          ?>
-          <a class="next-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$nextPage?>"><span class="screen-reader-text">Nächste Seite</span><span aria-hidden="true">›</span></a>
-          <?php
-          if($page == $allPages-1) {
+          if($page == $allPages) {
             ?>
+            <span class="tablenav-pages-navspan" aria-hidden="true">›</span>
             <span class="tablenav-pages-navspan" aria-hidden="true">»</span>
             <?php
           } else {
             ?>
-            <a class="last-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$allPages?>"><span class="screen-reader-text">Letzte Seite</span><span aria-hidden="true">»</span></a>
+            <a class="next-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$nextPage?>"><span class="screen-reader-text">Nächste Seite</span><span aria-hidden="true">›</span></a>
             <?php
+            if($page == $allPages-1) {
+              ?>
+              <span class="tablenav-pages-navspan" aria-hidden="true">»</span>
+              <?php
+            } else {
+              ?>
+              <a class="last-page" href="<?php echo $path . '?page=pr-breakfast&paginierung='.$allPages?>"><span class="screen-reader-text">Letzte Seite</span><span aria-hidden="true">»</span></a>
+              <?php
+            }
           }
-        }
-        ?>
-      </span>
+          ?>
+        </span>
+      </div>
     </div>
-  </div>
+    <?php
+  }
+  ?>
+
 
 
   <p class="submit editDonationSaveButton">

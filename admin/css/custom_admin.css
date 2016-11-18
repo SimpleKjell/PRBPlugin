@@ -66,6 +66,7 @@
 .prevYear, .nextYear {
   color: #EA4E92;
   cursor: pointer;
+  display: none;
 }
 /*
 * END Main Donation Table
