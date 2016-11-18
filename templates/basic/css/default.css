@@ -147,10 +147,6 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 */
 
 
-
-
-
-
 /*
 * Mobile Anpassungen
 */
@@ -177,6 +173,8 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 	.icon-search { display:none; }
 	}
 
+ /* Für alle Geräte die Größer sind bis 1239px */
+
 @media screen and (min-width: 600px) and (max-width: 1239px) {
 	
 	.prb_form_container .prb_form input.prb_input { margin: 1% 0% 0 8%; width: 39%; }
@@ -190,3 +188,5 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 /*
 * Ende der Mobilen Anpassungen *
 */
+ 
+
