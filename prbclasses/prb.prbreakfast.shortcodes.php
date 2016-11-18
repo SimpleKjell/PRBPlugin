@@ -185,6 +185,10 @@ class PRBshortCode {
     		<div class="clear"></div><input class="prb_input" type="submit" value="absenden" id="prb_form_send">
 
     	</form>
+		<div class="clear"></div>
+    	<div class="prb_form_abschlusscreen">
+			<span>Vielen Dank für Ihr Interesse!</span><br>Der jeweilige Ansprechpartner setzt sich mit Ihnen in Verbindung.
+    	</div>
     </div>
     <?php
     //assign the file output to $content variable and clean buffer
