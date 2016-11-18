@@ -146,7 +146,55 @@ class PRBshortCode {
     ?>
 
 
-    <div id="sample_goal"></div>
+    <div id="main_goal"></div>
+    <div class="marginTopMedium showBundeslandGoals" style="text-align:right;">Bundesländer anzeigen <b style ="color:#EB6CA3 ;">></b></div>
+
+    <div class="bundesland_goals">
+      <div class="panel">
+        <label>Burgenland</label>
+        <div class="goals"></div>
+      </div>
+      <div class="panel">
+        <label>Oberösterreich</label>
+        <div class="goals"></div>
+      </div>
+      <div class="panel">
+        <label>Tirol</label>
+        <div class="goals"></div>
+      </div>
+      <div class="panel">
+        <label>Kärnten</label>
+        <div class="goals"></div>
+      </div>
+      <div class="panel">
+        <label>Salzburg</label>
+        <div class="goals"></div>
+      </div>
+      <div class="panel">
+        <label>Vorarlberg</label>
+        <div class="goals"></div>
+      </div>
+      <div class="panel">
+        <label>Niederösterreich</label>
+        <div class="goals"></div>
+      </div>
+      <div class="panel">
+        <label>Steiermark</label>
+        <div class="goals"></div>
+      </div>
+      <div class="panel">
+        <label>Wien</label>
+        <div class="goals"></div>
+      </div>
+
+      <div class="marginTopMedium hideBundeslandGoals" style="text-align:right;">Bundesländer verbergen <b style ="color:#EB6CA3 ;">></b></div>
+
+
+
+
+
+
+    </div>
 
 
     <?php

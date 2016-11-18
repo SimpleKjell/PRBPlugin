@@ -1,4 +1,21 @@
+/*
+* START Allgemeine Klassen
+*/
 
+.hidden {
+  display: none;
+}
+.marginTopMedium {
+  margin-top: 25px;
+}
+.marginBottomMedium {
+  margin-bottom: 25px;
+}
+
+
+/*
+* END Allgemeine Klassen
+*/
 .prb_footerspace {
 
 	margin-left: 70px;
@@ -145,7 +162,7 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 
 /* Abschlussmeldung */
 
-.prb_form_abschlusscreen {	
+.prb_form_abschlusscreen {
 	text-align: center;
 	display: none;
 }

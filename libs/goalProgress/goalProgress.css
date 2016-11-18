@@ -14,7 +14,27 @@ div.progressBar {
 	overflow: hidden;
 	width: 20px;
 }
+.bundesland_goals div.progressBar {
+	padding: 4px;
+	font-size: 1em;
+}
+.bundesland_goals .panel {
+	width: 33%;
+	display: inline-block;
+}
+.bundesland_goals .panel .goals {
+	width: 90%;
+}
 span.goalAmount {
 	display: none;
 	text-indent: -9999px;
+}
+.hideBundeslandGoals, .bundesland_goals {
+	display: none;
+}
+.hideBundeslandGoals, .showBundeslandGoals {
+	cursor: pointer;
+}
+.hideBundeslandGoals:hover, .showBundeslandGoals:hover {
+	color: #EB6CA3;
 }

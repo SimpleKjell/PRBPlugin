@@ -21,14 +21,39 @@ PRBFrontEnd.prototype = {
 	},
 	goalProgress: function() {
 
+		// Bundesländer anzeigen
+		jQuery('.showBundeslandGoals').click(function(evt) {
+			evt.preventDefault();
+			jQuery('.bundesland_goals').fadeIn(1000, function() {
+					jQuery('.hideBundeslandGoals').show();
+			});
+			jQuery(this).hide();
 
-		jQuery('#sample_goal').goalProgress({
-        goalAmount: 150,
-        currentAmount: 100,
-        //textBefore: '$',
-        textAfter: ' €'
+		})
+
+		// Bundesländer verbergen
+		jQuery('.hideBundeslandGoals').click(function(evt) {
+			evt.preventDefault();
+			jQuery('.bundesland_goals').fadeOut(1000, function() {
+					jQuery('.showBundeslandGoals').show();
+			});
+			jQuery(this).hide();
+
+		})
+
+		jQuery('#main_goal').goalProgress({
+        goalAmount: 3500,
+        currentAmount: 3000,
+        textBefore: '€',
+        textAfter: ' gespendet.'
     });
 
+		jQuery('.goals').goalProgress({
+        goalAmount: 1000,
+        currentAmount: 500,
+        textBefore: '€',
+        textAfter: ' gespendet.'
+    });
 
 	},
 	formSubmit: function() {
