@@ -237,12 +237,12 @@ class PRBshortCode {
     	<form class="prb_form">
         <?php $nonce = wp_create_nonce('send_prb_mails_nonce'); ?>
         <input type="hidden" id="mail_nonce" value="<?php echo $nonce;?>">
-    		<input class="prb_input" type="text" id="vorname" placeholder="Vorname" requiered>
-    		<input class="prb_input" type="text" id="nachname" placeholder="Nachname" requiered>
-    		<input class="prb_input" type="tel" id="tel" placeholder="Handynummer" requiered>
-    		<input class="prb_input" type="email" id="mail" placeholder="E-Mail" requiered>
+    		<input class="prb_input" type="text" id="vorname" placeholder="Vorname" required="">
+    		<input class="prb_input" type="text" id="nachname" placeholder="Nachname" required="">
+    		<input class="prb_input" type="tel" id="tel" placeholder="Handynummer" required="">
+    		<input class="prb_input" type="email" id="mail" placeholder="E-Mail" required="">
     		<div class="clear"></div>
-    		<select class="prb_form_select" id="bundesland">
+    		<select class="prb_form_select" id="bundesland" required="">
     			<option velue="waehle">Wähle dein Bundesland</option>
     			<option velue="burgenland">Burgenland</option>
     			<option velue="oberoesterreich">Oberösterreich</option>
@@ -259,6 +259,9 @@ class PRBshortCode {
     		<div class="clear"></div><input class="prb_input" type="submit" value="absenden" id="prb_form_send">
 
     	</form>
+      <script>
+        PRBFrontEnd.prototype.validateParsleyForm();
+      </script>
 		<div class="clear"></div>
     	<div class="prb_form_abschlusscreen">
 			<span>Vielen Dank für Ihr Interesse!</span><br>Der jeweilige Ansprechpartner setzt sich mit Ihnen in Verbindung.
