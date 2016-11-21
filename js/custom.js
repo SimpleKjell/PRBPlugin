@@ -38,7 +38,7 @@ PRBFrontEnd.prototype = {
 		// Bundesländer verbergen
 		jQuery('.hideBundeslandGoals').click(function(evt) {
 			evt.preventDefault();
-			jQuery('.bundesland_goals').fadeOut(1000, function() {
+			jQuery('.bundesland_goals').fadeOut(700, function() {
 					jQuery('.showBundeslandGoals').show();
 			});
 			jQuery(this).hide();
