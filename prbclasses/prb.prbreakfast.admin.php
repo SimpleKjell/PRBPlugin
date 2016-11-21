@@ -37,12 +37,14 @@ class PRBAdmin extends PRBCommon
 
     $donationID = $_REQUEST['id'];
     $donations = $this->options['prb_donations'];
-    $donations = array_reverse($donations);
+    //$donations = array_reverse($donations);
 
-
+    //var_dump($donations[$donationID]);
     unset($donations[$donationID]);
 
-    $donations = array_reverse($donations);
+    $donations = array_values($donations);
+
+    //$donations = array_reverse($donations);
     $this->prbreakfast_set_option('prb_donations',$donations);
     die();
   }
@@ -75,7 +77,7 @@ class PRBAdmin extends PRBCommon
   // Menüs hinzufügen
   function add_menu()
 	{
-		add_menu_page( __('Pinkribbonbreakfast','prbreakfast'), __('Pinkribbonbreakfast','prbreakfast'), 'manage_options', $this->slug, array(&$this, 'admin_page'), sfprbreakfast_url .'admin/images/favicon-16x16.png', '159.140');
+		add_menu_page( __('Pink Ribbon','prbreakfast'), __('Pink Ribbon','prbreakfast'), 'manage_options', $this->slug, array(&$this, 'admin_page'), sfprbreakfast_url .'admin/images/favicon-16x16.png', '159.140');
 	}
 
   /*
@@ -276,7 +278,7 @@ class PRBAdmin extends PRBCommon
    );
 
    $this->default_tab = 'main';
- } 
+ }
 
 
 }

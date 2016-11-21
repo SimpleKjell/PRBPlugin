@@ -156,6 +156,21 @@ class PRBshortCode {
     return $fullRespDonations;
   }
 
+  function getActualYearDonations($donations)
+  {
+
+    $actualYear =  date("Y");
+
+    foreach($donations as $key => $val) {
+
+      if (!strpos($val['month'], $actualYear)) {
+        unset($donations[$key]);
+      }
+    }
+
+    return $donations;
+  }
+
   public function prbreakfast_donation_progress_function($atts)
   {
     ob_start();
@@ -165,8 +180,10 @@ class PRBshortCode {
     */
     $donations = $this->options['prb_donations'];
 
+    $donations = $this->getActualYearDonations($donations);
 
     $valueGesamt = 0;
+
     if(!empty($donations)) {
       foreach($donations as $donation) {
         $respDonations[$donation['resp']] += $donation['value'];
@@ -174,7 +191,7 @@ class PRBshortCode {
             $valueGesamt += $donation['value'];
         }
       }
-    }    
+    }
 
     ?>
     <div class="mainDonationenZiel">

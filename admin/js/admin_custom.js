@@ -75,7 +75,7 @@ PRBAdmin.prototype = {
 		{
 			// Wenn es ein nächstes Jahr gibt, zeige auch den Pfeil an
 			jQuery('.barGraphHeading .nextYear').show();
-		} else {			
+		} else {
 			// Wenn es kein nächstes Jahr gibt, zeige auch den Pfeil nicht an
 			jQuery('.barGraphHeading .nextYear').hide();
 		}
@@ -217,6 +217,7 @@ PRBAdmin.prototype = {
 			})
 
 			deleteDonation.done(function(response) {
+				//console.log(response)
 				location.reload();
 			})
 
