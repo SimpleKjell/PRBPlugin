@@ -45,14 +45,14 @@ PRBFrontEnd.prototype = {
         goalAmount: 3500,
         currentAmount: 3000,
         textBefore: '€',
-        textAfter: ' gespendet.'
+        textAfter: ' gesammelt.'
     });
 
 		jQuery('.goals').goalProgress({
         goalAmount: 1000,
         currentAmount: 500,
         textBefore: '€',
-        textAfter: ' gespendet.'
+        textAfter: ' gesammelt.'
     });
 
 	},

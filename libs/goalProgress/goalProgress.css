@@ -8,7 +8,7 @@ div.progressBar {
 	font-size: 1.5em;
 	font-family: 'helvetica neue', helvetica, arial, sans-serif;
 	letter-spacing: -1px;
-	font-weight: 700;
+	font-weight: 500;
 	padding: 10px;
 	display: block;
 	overflow: hidden;
@@ -19,11 +19,12 @@ div.progressBar {
 	font-size: 1em;
 }
 .bundesland_goals .panel {
-	width: 33%;
+	margin: 0 14% 0 6%;
 	display: inline-block;
 }
 .bundesland_goals .panel .goals {
-	width: 90%;
+	width: 200%;
+	
 }
 span.goalAmount {
 	display: none;
@@ -37,4 +38,13 @@ span.goalAmount {
 }
 .hideBundeslandGoals:hover, .showBundeslandGoals:hover {
 	color: #EB6CA3;
+}
+
+.bundesland_goals {
+	margin-top: 2%;
+}
+
+@media screen and (min-width: 600px) and (max-width: 1239px) {
+	.bundesland_goals .panel { margin: 0 23% 0 6%; }	
+	
 }

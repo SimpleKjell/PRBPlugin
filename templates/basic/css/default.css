@@ -25,6 +25,13 @@
 
 
 /*
+
+
+
+
+
+
+/*
 * Start Form *
 */
 
@@ -213,6 +220,7 @@ input[type=checkbox]:checked + .prb_form_btn { background: #EB6CA3; }
 	.prb_form_checkbox { margin: 3% 0% 0% 10%; }
 	.prb_footerspace img { display:none;}
 	.prb_footerspace { margin-left: 0; }
+	.bundesland_goals .panel { margin: 0 28% 0 6%; }				
 }
 
 
