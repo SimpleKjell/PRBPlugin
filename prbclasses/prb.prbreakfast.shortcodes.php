@@ -92,13 +92,15 @@ class PRBshortCode {
     }
     $advisorMail = 'service@krebshilfe.net';
 
+    $headers = array('From: Pink Ribbon Breakfast <info@pinkribbonbreakfast.at>');
+
     // Testmails
     $advisorMail = 'kjell.weibrecht@hotmail.de';
     $mailTo = 'kjell@simplefox.de';
 
     $mailToArray = array($mailTo, $advisorMail);
     $subject = 'Pink Ribbon Breakfast Anfrage';
-    $message = $vorname . ' ' . $nachname . ' möchte Pink Ribbon Breakfast organisieren.';
+    $message = $vorname . ' ' . $nachname . ' möchte ein Pink Ribbon Breakfast organisieren.';
     $message .= '<br /><br />';
     $message .= 'Kontaktdaten:';
     $message .= '<br />';
@@ -109,13 +111,14 @@ class PRBshortCode {
     $message .= 'Telefon: ' . $tel;
     $message .= '<br />';
     $message .= 'E-Mail: ' . $mail;
+    $message .= '<br />';
     $message .= 'Bundesland: ' . $bundesland;
 
     // Html in Mails erlauben
     add_filter('wp_mail_content_type',create_function('', 'return "text/html"; '));
 
     // Mail an den Zuständigen im Bundesland und den Advisor
-    $mailSent = wp_mail($mailToArray, $subject, $message);
+    $mailSent = wp_mail($mailToArray, $subject, $message, $headers);
 
 
     // Bestätigungsmail für den User
@@ -129,10 +132,10 @@ class PRBshortCode {
     $message = $this->options['confirmationMail'.$confirmationTextId];
 
     if(empty($message)) {
-      $message = 'Dies ist eine autmatisierte Antwortmail. <br /> Vielen Dank für Dein Interesse. Pink Ribbon Breakfast wird sich mit Dir in Verbindung setzen. <br/> Mit freundlichen Grüßen, <br/> Pink Ribbon Breakfast';
+      $message = 'Vielen Dank für Dein Interesse. Pink Ribbon Breakfast wird sich mit Dir in Verbindung setzen. <br/> Mit freundlichen Grüßen, <br/> Pink Ribbon Breakfast';
     }
 
-    $mailSent = wp_mail($respondTo, $subject, $message);
+    $mailSent = wp_mail($respondTo, $subject, $message, $headers);
 
 
     echo $mailSent;
