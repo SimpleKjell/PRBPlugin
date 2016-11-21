@@ -12,7 +12,8 @@ div.progressBar {
 	padding: 10px;
 	display: block;
 	overflow: hidden;
-	width: 20px;
+	width: 90px;
+	min-width: 90px;
 }
 .bundesland_goals div.progressBar {
 	padding: 4px;
@@ -21,10 +22,11 @@ div.progressBar {
 .bundesland_goals .panel {
 	margin: 0 14% 0 6%;
 	display: inline-block;
+	min-width: 123px;
 }
 .bundesland_goals .panel .goals {
 	width: 200%;
-	
+
 }
 span.goalAmount {
 	display: none;
@@ -45,6 +47,6 @@ span.goalAmount {
 }
 
 @media screen and (min-width: 600px) and (max-width: 1239px) {
-	.bundesland_goals .panel { margin: 0 23% 0 6%; }	
-	
+	.bundesland_goals .panel { margin: 0 23% 0 6%; }
+
 }

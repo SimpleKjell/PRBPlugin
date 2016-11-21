@@ -41,19 +41,39 @@ PRBFrontEnd.prototype = {
 
 		})
 
+		var main_goal_value = jQuery('#main_goal').attr('data-value');
+		var goalAmount = parseInt(main_goal_value) *100 / 80;
+
 		jQuery('#main_goal').goalProgress({
-        goalAmount: 3500,
-        currentAmount: 3000,
+        goalAmount: goalAmount,
+        currentAmount: main_goal_value,
         textBefore: '€',
         textAfter: ' gesammelt.'
     });
 
-		jQuery('.goals').goalProgress({
-        goalAmount: 1000,
-        currentAmount: 500,
-        textBefore: '€',
-        textAfter: ' gesammelt.'
-    });
+		jQuery('.goals').each(function() {
+
+			var goal_value = parseInt(jQuery(this).attr('data-value'));
+
+			if(goal_value == 0) {
+				goalAmount = 10000;
+			} else if (goal_value < 3) {
+				goalAmount = 10000;
+			} else {
+				goalAmount = parseInt(goal_value) *100 / 80;
+			}
+
+
+
+			jQuery(this).goalProgress({
+	        goalAmount: goalAmount,
+	        currentAmount: goal_value,
+	        textBefore: '€',
+	        textAfter: ' gesammelt.'
+	    });
+		})
+
+
 
 	},
 	formSubmit: function() {

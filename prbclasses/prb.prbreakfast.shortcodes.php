@@ -140,60 +140,65 @@ class PRBshortCode {
     die();
   }
 
+  function fillEmptyDonations($respDonations)
+  {
+
+    $bundeslaender = array('Burgenland', 'Oberösterreich', 'Tirol', 'Kärnten', 'Salzburg', 'Vorarlberg', 'Niederösterreich', 'Steiermark', 'Wien');
+
+    foreach($bundeslaender as $bundeslandString) {
+      if(array_key_exists($bundeslandString, $respDonations)) {
+        $fullRespDonations[$bundeslandString] = $respDonations[$bundeslandString];
+      } else {
+        $fullRespDonations[$bundeslandString] = 0;
+      }
+
+    }
+    return $fullRespDonations;
+  }
+
   public function prbreakfast_donation_progress_function($atts)
   {
     ob_start();
+
+    /*
+    * Donations aufbereiten - gesamt und nach Monat
+    */
+    $donations = $this->options['prb_donations'];
+
+
+
+    if(!empty($donations)) {
+      foreach($donations as $donation) {
+        $respDonations[$donation['resp']] += $donation['value'];
+        if(!empty($donation['resp'])) {
+            $valueGesamt += $donation['value'];
+        }
+      }
+
+    }
+
     ?>
 
-
-    <div id="main_goal"></div>
+    <div data-value="<?php echo $valueGesamt;?>" id="main_goal"></div>
     <div class="marginTopMedium showBundeslandGoals" style="text-align:right;">Bundesländer anzeigen <b style ="color:#EB6CA3 ;">></b></div>
+    <?php
 
+
+    $respDonations = $this->fillEmptyDonations($respDonations);
+
+    ?>
     <div class="bundesland_goals">
-      <div class="panel">
-        <label>Burgenland</label>
-        <div class="goals"></div>
-      </div>
-      <div class="panel">
-        <label>Oberösterreich</label>
-        <div class="goals"></div>
-      </div>
-      <div class="panel">
-        <label>Tirol</label>
-        <div class="goals"></div>
-      </div>
-      <div class="panel">
-        <label>Kärnten</label>
-        <div class="goals"></div>
-      </div>
-      <div class="panel">
-        <label>Salzburg</label>
-        <div class="goals"></div>
-      </div>
-      <div class="panel">
-        <label>Vorarlberg</label>
-        <div class="goals"></div>
-      </div>
-      <div class="panel">
-        <label>Niederösterreich</label>
-        <div class="goals"></div>
-      </div>
-      <div class="panel">
-        <label>Steiermark</label>
-        <div class="goals"></div>
-      </div>
-      <div class="panel">
-        <label>Wien</label>
-        <div class="goals"></div>
-      </div>
-
+      <?php
+      foreach($respDonations as $bundesland => $value) {
+        ?>
+        <div class="panel">
+          <label><?php echo $bundesland;?></label>
+          <div data-value="<?php echo $value;?>" class="goals"></div>
+        </div>
+        <?php
+      }
+    ?>
       <div class="marginTopMedium hideBundeslandGoals" style="text-align:right;">Bundesländer verbergen <b style ="color:#EB6CA3 ;">></b></div>
-
-
-
-
-
-
     </div>
 
 
