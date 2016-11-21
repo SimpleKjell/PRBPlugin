@@ -13,7 +13,10 @@ div.progressBar {
 	display: block;
 	overflow: hidden;
 	width: 90px;
-	min-width: 90px;
+	min-width: 95px;
+}
+.mainDonationenZiel div.progressBar {
+	min-width: 150px;
 }
 .bundesland_goals div.progressBar {
 	padding: 4px;

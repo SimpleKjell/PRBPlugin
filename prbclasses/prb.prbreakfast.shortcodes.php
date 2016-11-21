@@ -174,12 +174,13 @@ class PRBshortCode {
             $valueGesamt += $donation['value'];
         }
       }
-    }
-
+    }    
 
     ?>
+    <div class="mainDonationenZiel">
+      <div data-value="<?php echo $valueGesamt;?>" id="main_goal"></div>
+    </div>
 
-    <div data-value="<?php echo $valueGesamt;?>" id="main_goal"></div>
     <div class="marginTopMedium showBundeslandGoals" style="text-align:right;">Bundesländer anzeigen <b style ="color:#EB6CA3 ;">></b></div>
     <?php
 
