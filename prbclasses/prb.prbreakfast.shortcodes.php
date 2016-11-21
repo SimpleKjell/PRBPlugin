@@ -166,7 +166,7 @@ class PRBshortCode {
     $donations = $this->options['prb_donations'];
 
 
-
+    $valueGesamt = 0;
     if(!empty($donations)) {
       foreach($donations as $donation) {
         $respDonations[$donation['resp']] += $donation['value'];
@@ -174,8 +174,8 @@ class PRBshortCode {
             $valueGesamt += $donation['value'];
         }
       }
-
     }
+
 
     ?>
 
